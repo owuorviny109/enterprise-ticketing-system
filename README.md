@@ -8,34 +8,34 @@ The Enterprise Ticketing System is a modern Angular-based support platform that 
 
 ## Key Features
 
-### 🎯 Public Ticket Submission
+### Public Ticket Submission
 - **No Login Required**: Users can submit support tickets directly from the homepage without creating an account
 - **Rich Text Editor**: Full-featured editor for detailed ticket descriptions
 - **File Attachments**: Drag-and-drop file upload functionality
 - **Real-time Validation**: Instant form validation and feedback
 - **Ticket Tracking**: Unique ticket keys generated for easy tracking
 
-### 📊 Admin Dashboard
+### Admin Dashboard
 - **Comprehensive Analytics**: Real-time metrics showing ticket statistics (new, open, closed, unassigned)
 - **Visual Charts**: Pie charts for ticket distribution by department and type
 - **Performance Metrics**: First response time and last response time tracking
 - **Ticket History**: 12-month historical data visualization
 - **User Statistics**: Customer and contact count tracking
 
-### 👥 User Management
+### User Management
 - **Role-Based Access**: Admin, Staff, and Customer roles with specific permissions
 - **User Creation**: Complete user management with profile photos
 - **Organization Management**: Group customers by organizations/departments
 - **Permission Control**: Granular access control for different system features
 
-### 🎫 Ticket Management
+### Ticket Management
 - **Advanced Filtering**: Filter tickets by type, category, department, priority, status, and assignee
 - **Search Functionality**: Quick search across all ticket fields
 - **Status Tracking**: Complete ticket lifecycle management
 - **Assignment System**: Assign tickets to specific staff members
 - **Export/Import**: Data export and import capabilities
 
-### 🎨 User Experience
+### User Experience
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **Blue/Purple Branding**: Clean, modern UI with consistent "The President's Award - Kenya" branding
 - **Intuitive Navigation**: Clear menu structure and breadcrumb navigation
@@ -123,11 +123,11 @@ ng serve
 ## Development Phases
 
 ### Phase 1: Public Homepage and Ticket Submission (Priority)
-- ✅ Public layout and homepage foundation
-- ✅ Hero section with branding
-- ✅ "How It Works" process section
-- ✅ Public ticket submission form
-- ✅ Homepage footer
+- Public layout and homepage foundation
+- Hero section with branding
+- "How It Works" process section
+- Public ticket submission form
+- Homepage footer
 
 ### Phase 2: Core Models and Configuration
 - Data models for User, Ticket, Organization
@@ -169,14 +169,14 @@ ng serve
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 
 For questions or support, please contact:
-- **Organization**: The President's Award - Kenya
-- **Developer**: OptimumComputerSystems
-- **Repository**: [https://github.com/owuorviny109/enterprise-ticketing-system](https://github.com/owuorviny109/enterprise-ticketing-system)
+- Organization: The President's Award - Kenya
+- Developer: OptimumComputerSystems
+- Repository: https://github.com/owuorviny109/enterprise-ticketing-system
 
 ---
 
