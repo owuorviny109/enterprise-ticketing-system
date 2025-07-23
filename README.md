@@ -87,39 +87,7 @@ src/
 └── styles/                           # Global SCSS
 ```
 
-## Getting Started
-
-### Prerequisites
-- Node.js (v18 or higher)
-- Angular CLI (v17 or higher)
-- MySQL database
-
-### Installation
-1. Clone the repository
-```bash
-git clone https://github.com/owuorviny109/enterprise-ticketing-system.git
-cd enterprise-ticketing-system
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Set up environment variables
-```bash
-cp src/environments/environment.example.ts src/environments/environment.ts
-```
-
-4. Configure your database connection and API endpoints in the environment file
-
-5. Start the development server
-```bash
-ng serve
-```
-
-6. Open your browser and navigate to `http://localhost:4200`
-
+ 
 ## Development Phases
 
 ### Phase 1: Public Homepage and Ticket Submission (Priority)
@@ -159,26 +127,4 @@ ng serve
 - Performance optimization
 - Production deployment preparation
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-For questions or support, please contact:
-- Organization: The President's Award - Kenya
-- Developer: OptimumComputerSystems
-- Repository: https://github.com/owuorviny109/enterprise-ticketing-system
-
----
-
-© 2024 President's Award Kenya by OptimumComputerSystems
-
+ 
