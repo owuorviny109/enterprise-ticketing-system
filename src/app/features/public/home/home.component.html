@@ -35,21 +35,140 @@
   <p class="label">Process</p>
   <h2>How It Works</h2>
   <p>Simple Steps to Get Your Requests Resolved</p>
+
   <div class="steps">
+    <!-- Step 1 -->
     <div>
-      <img src="assets/submit-icon.png" alt="Submit Icon" />
+      <div class="blob-container">
+        <svg class="blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#3b5bdb" d="M50 10c10-10 30-10 40 0s30-10 40 0 10 30 0 40 10 30 0 40-30 10-40 0-30 10-40 0-10-30 0-40-10-30 0-40z" />
+        </svg>
+        <img class="icon" src="assets/submit-icon.png" alt="" />
+      </div>
       <h3>Submit A ticket</h3>
-      <p>You can submit ticket from this home page or dashboard after login. If you don't have login access you can create account from this link.</p>
+      <p>You can submit a ticket from the home page or dashboard...</p>
     </div>
+
+    <!-- Step 2 -->
     <div>
-      <img src="assets/email-icon.png" alt="Email Icon" />
+      <div class="blob-container">
+        <svg class="blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#3b5bdb" d="M50 10c10-10 30-10 40 0s30-10 40 0 10 30 0 40 10 30 0 40-30 10-40 0-30 10-40 0-10-30 0-40-10-30 0-40z" />
+        </svg>
+        <img class="icon" src="assets/email-icon.png" alt="" />
+      </div>
       <h3>Track progress with email</h3>
-      <p>You will get email progress when change ticket status or you can comment and discuss with agent for a particular ticket discussion.</p>
+      <p>You will get email progress when ticket status changes...</p>
     </div>
+
+    <!-- Step 3 -->
     <div>
-      <img src="assets/done-icon.png" alt="Done Icon" />
+      <div class="blob-container">
+        <svg class="blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#3b5bdb" d="M50 10c10-10 30-10 40 0s30-10 40 0 10 30 0 40 10 30 0 40-30 10-40 0-30 10-40 0-10-30 0-40-10-30 0-40z" />
+        </svg>
+        <img class="icon" src="assets/done-icon.png" alt="" />
+      </div>
       <h3>Done and Close the ticket</h3>
-      <p>After marking done a ticket agent will close the ticket and you would get notified when its closed.</p>
+      <p>After marking a ticket as done, the agent will close it...</p>
+    </div>
+  </div>
+</section>
+<!-- Ticket Submission Form Section -->
+<section class="ticket-form-section">
+  <div class="container">
+
+    <!-- Success Message -->
+    <div class="success-message hidden">
+      <div class="success-content">
+        <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>Ticket Submitted Successfully!</h3>
+        <p>Your ticket has been created and you will receive a confirmation email shortly with your ticket number.</p>
+      </div>
+    </div>
+
+    <!-- Ticket Form -->
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h2>Create a ticket</h2>
+        <p>Submit your request and our team will get back to you as soon as possible.</p>
+      </div>
+
+      <form class="ticket-form">
+        <!-- Personal Info -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" placeholder="Enter your first name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" placeholder="Enter your last name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email address">
+          </div>
+        </div>
+
+        <!-- Subject and Type -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="Brief description of your issue">
+          </div>
+          <div class="form-group">
+            <label for="ticketType">Ticket type</label>
+            <select id="ticketType">
+              <option value="">Select a type</option>
+              <option>Bug Report</option>
+              <option>Feature Request</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Department -->
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="department">Department</label>
+            <select id="department">
+              <option value="">Select a department</option>
+              <option>Support</option>
+              <option>Billing</option>
+              <option>Sales</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Request Details -->
+        <div class="form-group">
+          <label for="requestDetails">Request Details</label>
+          <textarea id="requestDetails" rows="6" placeholder="Please provide detailed information about your request..."></textarea>
+        </div>
+
+        <!-- File Attachment -->
+        <div class="form-group">
+          <label for="attachments">Attach files</label>
+          <input type="file" id="attachments" multiple>
+        </div>
+
+        <!-- Terms -->
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="agreeToTerms">
+            I agree with the <a href="#">terms and conditions</a>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
