@@ -2,7 +2,9 @@
 
 ## Phase 1: Public Homepage and Ticket Submission (Priority)
 
-- [ ] 1. Create public homepage foundation
+- [x] 1. Create public homepage foundation
+
+
 
 
   - Set up public layout component in layout/public-layout/
@@ -11,12 +13,14 @@
   - Add "The President's Award - Kenya" branding and logo
   - _Requirements: 1.1, 9.3, 10.1_
 
+
 - [ ] 2. Build homepage hero section
   - Create hero component with blue gradient background
   - Add main heading "Effortless Ticketing: Submit, Track, and Resolve with Ease! CRM"
   - Implement description text about streamlining ticket processes
   - Add "Login CRM" and "Submit ticket" call-to-action buttons
   - Include President's Award logo and certification badges
+
   - _Requirements: 1.1, 10.1_
 
 - [ ] 3. Implement "How It Works" section
@@ -24,6 +28,9 @@
   - Add step 1: "Submit A ticket" with icon and description
   - Add step 2: "Track progress with email" with icon and description  
   - Add step 3: "Done and Close the ticket" with icon and description
+
+
+
   - Style with consistent blue theme and proper spacing
   - _Requirements: 10.2, 10.3, 10.4, 10.5_
 
@@ -34,6 +41,8 @@
   - Add rich text editor for Request Details with formatting toolbar
   - Include file attachment functionality with "Attach files" option
   - Add terms and conditions checkbox with link
+
+
   - Implement "Submit" button with proper validation
   - _Requirements: 1.2, 1.3, 1.4, 1.5, 1.6_
 

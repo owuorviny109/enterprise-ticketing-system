@@ -49,96 +49,175 @@ graph TB
 
 ## Components and Interfaces
 
-### Core Angular Structure
+### Modern Standalone Angular Structure
 
 ```
 src/
 ├── app/
 │   ├── core/                          # Singleton providers, interceptors, guards
 │   │   ├── guards/
-│   │   │   └── auth.guard.ts
+│   │   │   └── auth.guard.ts          # Standalone functional guard
 │   │   ├── interceptors/
 │   │   │   └── http-error.interceptor.ts
 │   │   ├── services/
-│   │   │   ├── auth.service.ts
+│   │   │   ├── auth.service.ts        # Injectable service
 │   │   │   └── token-storage.service.ts
-│   │   ├── http/                      # Centralized HTTP configuration (optional)
-│   │   └── core.module.ts
-│   ├── shared/                        # UI components, directives, pipes, modules
+│   │   └── http/                      # HTTP client configuration
+│   ├── shared/                        # Standalone UI components, directives, pipes
 │   │   ├── components/
 │   │   │   ├── loader/
+│   │   │   │   └── loader.component.ts    # Standalone component
 │   │   │   ├── toast/
+│   │   │   │   └── toast.component.ts     # Standalone component
 │   │   │   ├── dialog/
+│   │   │   │   └── dialog.component.ts    # Standalone component
 │   │   │   └── avatar/
+│   │   │       └── avatar.component.ts    # Standalone component
 │   │   ├── directives/
+│   │   │   └── role.directive.ts          # Standalone directive
 │   │   ├── pipes/
-│   │   ├── shared.module.ts
-│   │   └── shared.scss                # Global shared styling tokens/variables
-│   ├── layout/                        # Layouts (public vs. dashboard)
+│   │   │   └── date-format.pipe.ts        # Standalone pipe
+│   │   └── shared.scss                    # Global shared styling tokens/variables
+│   ├── layout/                            # Standalone layout components
 │   │   ├── public-layout/
-│   │   │   └── public-layout.component.ts|html|scss
-│   │   ├── dashboard-layout/
-│   │   │   └── dashboard-layout.component.ts|html|scss
-│   │   └── layout.module.ts
-│   ├── config/                        # Static configurations/constants
+│   │   │   └── public-layout.component.ts # Standalone layout
+│   │   └── dashboard-layout/
+│   │       └── dashboard-layout.component.ts # Standalone layout
+│   ├── config/                            # Static configurations/constants
 │   │   ├── api-endpoints.ts
 │   │   ├── roles.enum.ts
 │   │   ├── route-paths.ts
 │   │   └── feature-flags.ts
-│   ├── models/                        # Global/shared interfaces and DTOs
+│   ├── models/                            # Global/shared interfaces and DTOs
 │   │   ├── user.model.ts
 │   │   ├── ticket.model.ts
 │   │   ├── contact.model.ts
 │   │   └── index.ts
-│   ├── state/                         # Centralized app state (NgRx or signals)
-│   │   ├── store/
-│   │   └── state.module.ts
-│   ├── features/                      # All app features, lazy-loaded
-│   │   ├── public/                    # Before authentication
+│   ├── state/                             # Signal-based state management
+│   │   ├── signals/
+│   │   │   ├── auth.signals.ts
+│   │   │   ├── ticket.signals.ts
+│   │   │   └── user.signals.ts
+│   │   └── store/
+│   ├── features/                          # Feature modules with standalone components
+│   │   ├── public/                        # Public features (no auth required)
 │   │   │   ├── home/
-│   │   │   ├── services/
-│   │   │   ├── faqs/
+│   │   │   │   ├── home.component.ts      # Standalone component
+│   │   │   │   ├── home.component.html
+│   │   │   │   └── home.component.scss
 │   │   │   ├── contact/
-│   │   │   ├── components/            # Feature-specific UI blocks
-│   │   │   └── public-routing.module.ts
-│   │   ├── auth/                      # Auth flows
+│   │   │   │   ├── contact.component.ts   # Standalone component
+│   │   │   │   ├── contact.component.html
+│   │   │   │   └── contact.component.scss
+│   │   │   ├── faqs/
+│   │   │   │   ├── faqs.component.ts      # Standalone component
+│   │   │   │   ├── faqs.component.html
+│   │   │   │   └── faqs.component.scss
+│   │   │   ├── services/
+│   │   │   │   └── public.service.ts      # Injectable service
+│   │   │   └── components/                # Shared public components
+│   │   ├── auth/                          # Authentication features
 │   │   │   ├── login/
+│   │   │   │   ├── login.component.ts     # Standalone component
+│   │   │   │   ├── login.component.html
+│   │   │   │   └── login.component.scss
 │   │   │   ├── register/
-│   │   │   └── auth-routing.module.ts
-│   │   ├── dashboard/                 # Post-login parent shell (optional)
-│   │   │   └── dashboard-routing.module.ts
-│   │   ├── tickets/                   # Ticket management
+│   │   │   │   ├── register.component.ts  # Standalone component
+│   │   │   │   ├── register.component.html
+│   │   │   │   └── register.component.scss
+│   │   │   └── services/
+│   │   │       └── auth-feature.service.ts
+│   │   ├── dashboard/                     # Dashboard feature
+│   │   │   ├── dashboard.component.ts     # Standalone component
+│   │   │   ├── dashboard.component.html
+│   │   │   ├── dashboard.component.scss
+│   │   │   ├── components/                # Dashboard-specific components
+│   │   │   │   ├── metrics-card/
+│   │   │   │   └── chart/
+│   │   │   └── services/
+│   │   │       └── dashboard.service.ts
+│   │   ├── tickets/                       # Ticket management feature
 │   │   │   ├── pages/
 │   │   │   │   ├── create-ticket/
+│   │   │   │   │   ├── create-ticket.component.ts # Standalone
+│   │   │   │   │   ├── create-ticket.component.html
+│   │   │   │   │   └── create-ticket.component.scss
 │   │   │   │   ├── ticket-detail/
+│   │   │   │   │   ├── ticket-detail.component.ts # Standalone
+│   │   │   │   │   ├── ticket-detail.component.html
+│   │   │   │   │   └── ticket-detail.component.scss
 │   │   │   │   └── ticket-list/
+│   │   │   │       ├── ticket-list.component.ts   # Standalone
+│   │   │   │       ├── ticket-list.component.html
+│   │   │   │       └── ticket-list.component.scss
+│   │   │   ├── components/                # Ticket-specific components
+│   │   │   │   ├── ticket-filter/
+│   │   │   │   └── rich-text-editor/
 │   │   │   ├── services/
+│   │   │   │   └── ticket.service.ts      # Injectable service
 │   │   │   ├── guards/
-│   │   │   ├── models/
-│   │   │   └── tickets.module.ts
-│   │   ├── customers/                 # CRM users
-│   │   ├── notes/
-│   │   ├── contacts/
-│   │   ├── organizations/
-│   │   ├── manage-users/
-│   │   ├── settings/
-│   │   └── features-routing.module.ts
-│   ├── app-routing.module.ts         # Root router setup
-│   ├── app.component.ts|html|scss
-│   └── app.module.ts
+│   │   │   │   └── ticket.guard.ts        # Functional guard
+│   │   │   └── models/
+│   │   │       └── ticket-feature.model.ts
+│   │   ├── customers/                     # Customer management
+│   │   │   ├── customer-list.component.ts # Standalone component
+│   │   │   ├── customer-form.component.ts # Standalone component
+│   │   │   └── services/
+│   │   │       └── customer.service.ts
+│   │   ├── users/                         # User management
+│   │   │   ├── user-list.component.ts     # Standalone component
+│   │   │   ├── user-form.component.ts     # Standalone component
+│   │   │   ├── user-profile.component.ts  # Standalone component
+│   │   │   └── services/
+│   │   │       └── user.service.ts
+│   │   ├── organizations/                 # Organization management
+│   │   │   ├── organization-list.component.ts # Standalone component
+│   │   │   ├── organization-form.component.ts # Standalone component
+│   │   │   └── services/
+│   │   │       └── organization.service.ts
+│   │   ├── notes/                         # Notes feature
+│   │   │   ├── notes.component.ts         # Standalone component
+│   │   │   └── services/
+│   │   │       └── notes.service.ts
+│   │   ├── contacts/                      # Contacts feature
+│   │   │   ├── contacts.component.ts      # Standalone component
+│   │   │   └── services/
+│   │   │       └── contacts.service.ts
+│   │   └── settings/                      # Settings feature
+│   │       ├── settings.component.ts      # Standalone component
+│   │       └── services/
+│   │           └── settings.service.ts
+│   ├── app.routes.ts                      # Route configuration
+│   ├── app.config.ts                      # Application configuration
+│   ├── app.component.ts                   # Root standalone component
+│   ├── app.component.html
+│   └── app.component.scss
 ├── assets/
 │   ├── images/
-│   ├── i18n/                          # Localized translation files
-│   │   ├── en.json
-│   │   └── sw.json
+│   └── i18n/                              # Localized translation files
+│       ├── en.json
+│       └── sw.json
 ├── environments/
 │   ├── environment.ts
 │   └── environment.prod.ts
-├── styles/                           # Global SCSS
+├── styles/                                # Global SCSS with design tokens
 │   ├── base/
-│   ├── mixins/
-│   ├── variables/
-│   └── index.scss
+│   │   ├── _reset.scss
+│   │   ├── _typography.scss
+│   │   └── _layout.scss
+│   ├── components/
+│   │   ├── _buttons.scss
+│   │   ├── _forms.scss
+│   │   └── _cards.scss
+│   ├── utilities/
+│   │   ├── _mixins.scss
+│   │   ├── _functions.scss
+│   │   └── _helpers.scss
+│   ├── themes/
+│   │   ├── _light.scss
+│   │   ├── _dark.scss
+│   │   └── _variables.scss
+│   └── main.scss
 ├── index.html
 ├── styles.scss
 └── main.ts
