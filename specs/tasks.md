@@ -2,7 +2,8 @@
 
 ## Phase 1: Public Homepage and Ticket Submission (Priority)
 
-- [x] 1. Create public homepage foundation
+- [-] 1. Create public homepage foundation
+
 
 
 
