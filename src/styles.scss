@@ -48,12 +48,12 @@ p {
 }
 
 a {
-  color: #4f46e5;
+  color: #3b82f6;
   text-decoration: none;
   transition: color 0.3s ease;
   
   &:hover {
-    color: #4338ca;
+    color: rgba(59, 130, 246, 0.8);
   }
 }
 
@@ -66,7 +66,7 @@ button {
   transition: all 0.3s ease;
   
   &:focus {
-    outline: 2px solid #4f46e5;
+    outline: 2px solid #3b82f6;
     outline-offset: 2px;
   }
 }
@@ -82,8 +82,8 @@ input, textarea, select {
   
   &:focus {
     outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 }
 
