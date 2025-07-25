@@ -16,51 +16,31 @@ export const routes: Routes = [
   // Admin routes with dashboard layout
   {
     path: 'dashboard',
-    loadComponent: () => import('./components/layout.component').then(m => m.DashboardLayoutComponent),
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
     children: [
       {
         path: '',
-        loadComponent: () => import('./components/admin.component').then(m => m.DashboardComponent)
+        loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
       }
     ]
   },
   {
     path: 'tickets',
-    loadComponent: () => import('./components/layout.component').then(m => m.DashboardLayoutComponent),
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
     children: [
       {
         path: '',
-        loadComponent: () => import('./components/admin.component').then(m => m.TicketsComponent)
+        loadComponent: () => import('./features/tickets/tickets.component').then(m => m.TicketsComponent)
       }
     ]
   },
   {
     path: 'settings/user-roles',
-    loadComponent: () => import('./components/layout.component').then(m => m.DashboardLayoutComponent),
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
     children: [
       {
         path: '',
-        loadComponent: () => import('./components/forms.component').then(m => m.UserRolesComponent)
-      }
-    ]
-  },
-  {
-    path: 'manage-users/create',
-    loadComponent: () => import('./components/layout.component').then(m => m.DashboardLayoutComponent),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./components/forms.component').then(m => m.CreateUserComponent)
-      }
-    ]
-  },
-  {
-    path: 'organizations/create',
-    loadComponent: () => import('./components/layout.component').then(m => m.DashboardLayoutComponent),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./components/forms.component').then(m => m.CreateOrganizationComponent)
+        loadComponent: () => import('./features/settings/user-roles/user-roles.component').then(m => m.UserRolesComponent)
       }
     ]
   }
