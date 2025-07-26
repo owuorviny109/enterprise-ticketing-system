@@ -146,6 +146,7 @@
   font-weight: 600;
   font-size: 1rem;
   margin: 0;
+  padding-left: 24px;
 }
 
 .how-it-works h2 {
@@ -153,14 +154,17 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin: 0;
- ;
+  padding-left: 24px;
+
 }
 
-.how-it-works > p {
+.how-it-works>p {
   font-size: 1.08rem;
   color: #444;
   margin-top: 0;
   margin-bottom: 20px;
+  padding-left: 24px;
+
 }
 
 .steps {
@@ -169,14 +173,14 @@
   flex-wrap: wrap;
 }
 
-.steps > div {
+.steps>div {
   border-radius: 18px;
   padding: 32px 24px;
   width: 270px;
   transition: box-shadow 0.2s;
 }
 
-.steps > div:hover {
+.steps>div:hover {
   box-shadow: 0 4px 24px rgba(60, 60, 120, 0.12);
 }
 
@@ -196,31 +200,63 @@
   color: #555;
   line-height: 1.5;
 }
-.blob-container {
+
+/* Rectangle-based Flower Step Icons */
+.step-icon {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 20px 0;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
   position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0%;
+  border-radius: 15px;
 }
 
-.blob-container svg {
-  width: 140px;
-  height: 140px;
-  display: block;
-}
-
-.blob-container .icon {
-  width: 36px; 
-  height: 36px;
+.step-icon::before {
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(13%, -65%);
+  width: 100%;
+  height: 100%;
+  background: #4f46e5;
+  border-radius: 15px;
+  transform: rotate(22.5deg);
+  transition: transform 0.3s ease;
   z-index: 1;
-  pointer-events: none;
 }
 
+.step-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #4f46e5;
+  border-radius: 15px;
+  transition: background 0.3s ease;
+  z-index: 1;
+}
 
+.step-icon:hover::before {
+  background: #4338ca;
+  transform: rotate(45deg);
+}
+
+.step-icon:hover::after {
+  background: #4338ca;
+}
+
+.step-icon .icon {
+  width: 32px;
+  height: 32px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  transform: translateY(8px);
+}
 /* Ticket Submission Form Section  */
 .container {
   max-width: 840px;
@@ -338,7 +374,71 @@ input[type="file"] {
   color: #2e7d32;
 }
 
+/* Request Details Editor Styling */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: #f9fafb;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  flex-wrap: wrap;
+}
 
+.format-select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+  margin-right: 8px;
+}
+
+.toolbar-btn {
+  padding: 6px 10px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  color: #374151;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-btn:hover {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.toolbar-btn:active {
+  background: #d1d5db;
+  transform: translateY(1px);
+}
+
+/* Textarea with toolbar */
+.form-group textarea {
+  border-radius: 0 0 6px 6px;
+  border-top: none;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #3b5bdb;
+  outline: none;
+}
 /* Responsive Design */
 @media (max-width: 900px) {
   .navbar {
