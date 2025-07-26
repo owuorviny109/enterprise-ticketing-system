@@ -22,6 +22,10 @@ export const routes: Routes = [
         path: 'faqs',
         loadComponent: () => import('./features/public/faqs/faqs.component').then(m => m.FaqsComponent)
       },
+      {
+        path: 'submit-ticket',
+        loadComponent: () => import('./features/public/ticket-form/ticket-form.component').then(m => m.TicketFormComponent)
+      },
     ]
   },
 
