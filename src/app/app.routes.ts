@@ -45,20 +45,26 @@ export const routes: Routes = [
     ]
   },
 
-  // Protected routes (authentication required)
+  // Protected routes with dashboard layout (Gerson's approach)
   {
     path: 'dashboard',
-    loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
-    // canActivate: [authGuard] // Uncomment when auth guard is implemented
-  },
-
-  // Ticket management routes
-  {
-    path: 'tickets',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/tickets/pages/ticket-list/ticket-list.component').then(m => m.TicketListComponent)
+        loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+      }
+    ]
+  },
+
+  // Ticket management routes with dashboard layout
+  {
+    path: 'tickets',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/tickets/tickets.component').then(m => m.TicketsComponent)
       },
       {
         path: 'create',
@@ -71,46 +77,80 @@ export const routes: Routes = [
     ]
   },
 
-  // User management routes
-  {
-    path: 'users',
-    loadComponent: () => import('./features/manage-users/manage-users.component').then(m => m.ManageUsersComponent),
-    // canActivate: [authGuard, adminGuard] // Uncomment when guards are implemented
-  },
-
-  // Customer management routes
-  {
-    path: 'customers',
-    loadComponent: () => import('./features/customers/customer-list.component').then(m => m.CustomerListComponent),
-    // canActivate: [authGuard] // Uncomment when auth guard is implemented
-  },
-
-  // Organization management routes
-  {
-    path: 'organizations',
-    loadComponent: () => import('./features/organizations/organizations.component').then(m => m.OrganizationsComponent),
-    // canActivate: [authGuard] // Uncomment when auth guard is implemented
-  },
-
-  // Notes routes
-  {
-    path: 'notes',
-    loadComponent: () => import('./features/notes/notes.component').then(m => m.NotesComponent),
-    // canActivate: [authGuard] // Uncomment when auth guard is implemented
-  },
-
-  // Contacts routes
-  {
-    path: 'contacts',
-    loadComponent: () => import('./features/contacts/contacts.component').then(m => m.ContactsComponent),
-    // canActivate: [authGuard] // Uncomment when auth guard is implemented
-  },
-
-  // Settings routes
+  // Settings routes with dashboard layout
   {
     path: 'settings',
-    loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
-    // canActivate: [authGuard] // Uncomment when auth guard is implemented
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent)
+      },
+      {
+        path: 'user-roles',
+        loadComponent: () => import('./features/settings/user-roles/user-roles.component').then(m => m.UserRolesComponent)
+      }
+    ]
+  },
+
+  // User management routes with dashboard layout
+  {
+    path: 'users',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/manage-users/manage-users.component').then(m => m.ManageUsersComponent)
+      }
+    ]
+  },
+
+  // Customer management routes with dashboard layout
+  {
+    path: 'customers',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/customers/customer-list.component').then(m => m.CustomerListComponent)
+      }
+    ]
+  },
+
+  // Organization management routes with dashboard layout
+  {
+    path: 'organizations',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/organizations/organizations.component').then(m => m.OrganizationsComponent)
+      }
+    ]
+  },
+
+  // Notes routes with dashboard layout
+  {
+    path: 'notes',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/notes/notes.component').then(m => m.NotesComponent)
+      }
+    ]
+  },
+
+  // Contacts routes with dashboard layout
+  {
+    path: 'contacts',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/contacts/contacts.component').then(m => m.ContactsComponent)
+      }
+    ]
   },
 
   // 404 Not Found
