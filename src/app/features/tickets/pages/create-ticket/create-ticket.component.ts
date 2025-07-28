@@ -199,9 +199,9 @@ export class CreateTicketComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private ticketService = inject(TicketService);
-  
+
   isSubmitting = signal(false);
-  
+
   ticketForm: FormGroup = this.fb.group({
     subject: ['', [Validators.required, Validators.minLength(5)]],
     description: ['', [Validators.required, Validators.minLength(10)]],
@@ -212,11 +212,11 @@ export class CreateTicketComponent {
   async onSubmit() {
     if (this.ticketForm.valid) {
       this.isSubmitting.set(true);
-      
+
       try {
         const ticketData = this.ticketForm.value;
         await this.ticketService.createTicket(ticketData);
-        
+
         // Navigate to ticket list or show success message
         this.router.navigate(['/tickets']);
       } catch (error) {
