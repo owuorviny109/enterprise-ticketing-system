@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
+/**
+ * Main tickets list page for admin dashboard
+ * Shows all tickets with filtering and search capabilities
+ */
 @Component({
   selector: 'app-tickets',
   standalone: true,
@@ -10,6 +15,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./tickets.component.css']
 })
 export class TicketsComponent {
+  private router = inject(Router);
+  
+  // Filter properties
   searchTerm = '';
   selectedType = '';
   selectedCategory = '';
@@ -18,6 +26,7 @@ export class TicketsComponent {
   selectedStatus = '';
   selectedAssignee = '';
 
+  // Mock ticket data - replace with API call when backend is ready
   tickets = [
     { key: '#838819', subject: 'How to rejoin the scheme in university', author: 'Ivy Rose Arthur', assignee: 'Mirko Binger', priority: '', status: 'Pending', date: '6 months ago', updated: '13 days ago' },
     { key: '#708842', subject: 'wifi issue', author: 'Emmanuel Oginga', assignee: 'Emmanuel Ogilo', priority: '', status: 'Pending', date: '18 days ago', updated: '13 days ago' },
@@ -45,5 +54,13 @@ export class TicketsComponent {
     this.selectedStatus = '';
     this.selectedAssignee = '';
     this.filteredTickets = [...this.tickets];
+  }
+
+  /**
+   * Navigate to ticket creation form
+   * Currently redirects to public contact form - users can create tickets regardless of login status
+   */
+  navigateToCreateTicket() {
+    this.router.navigate(['/contact']);
   }
 }

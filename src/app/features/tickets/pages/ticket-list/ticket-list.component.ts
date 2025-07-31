@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { TicketService, Ticket, TicketFilter } from '../../services/ticket.service';
+import { TicketService, Ticket, TicketFilter, TicketListResponse } from '../../services/ticket.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
         <button 
           type="button" 
           class="btn-primary"
-          routerLink="/tickets/create"
+          routerLink="/contact"
+          (click)="navigateToCreate()"
         >
           + New Ticket
         </button>
@@ -438,6 +439,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class TicketListComponent implements OnInit {
   private ticketService = inject(TicketService);
   private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   // Signals for reactive state
   tickets = signal<Ticket[]>([]);
@@ -479,7 +481,7 @@ export class TicketListComponent implements OnInit {
 
   private loadTickets() {
     this.loading.set(true);
-    
+
     const filter: TicketFilter = {
       ...this.filterForm.value,
       page: this.currentPage(),
@@ -516,5 +518,10 @@ export class TicketListComponent implements OnInit {
       this.currentPage.set(page);
       this.loadTickets();
     }
+  }
+
+  navigateToCreate() {
+    console.log('Navigating to create ticket...');
+    this.router.navigate(['/contact']);
   }
 }
