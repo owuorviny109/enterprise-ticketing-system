@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 export const routes: Routes = [
   // Public routes (no authentication required) - using public layout
   {
