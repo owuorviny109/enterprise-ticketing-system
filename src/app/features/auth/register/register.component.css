@@ -1,18 +1,45 @@
-.card {
-  margin-top: 50px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+.register-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #f3f3f3;
+  border-radius: 10px;
 }
 
-.card-header {
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+form div {
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 0.7rem;
   background-color: #28a745;
   color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.btn-primary {
-  background-color: #28a745;
-  border-color: #28a745;
+.register-links {
+  margin-top: 1rem;
+  text-align: center;
 }
 
-.invalid-feedback {
-  display: block;
+.register-links a {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 0.3rem;
 }

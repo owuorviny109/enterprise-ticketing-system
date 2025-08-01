@@ -18,7 +18,7 @@ export class AuthService {
   register(user: User): boolean {
     const users: User[] = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
     if (users.find(u => u.email === user.email)) {
-      return false; // Email already exists
+      return false;
     }
 
     users.push(user);
@@ -27,13 +27,15 @@ export class AuthService {
   }
 
   login(email: string, password: string): boolean {
-    const users: User[] = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
-    if (!user) {
-      return false;
-    }
+    //  Dev override: bypass credential checks
+    const mockUser: User = {
+      firstName: 'Dev',
+      lastName: 'Tester',
+      email: email,
+      password: password
+    };
 
-    localStorage.setItem(this.currentUserKey, JSON.stringify(user));
+    localStorage.setItem(this.currentUserKey, JSON.stringify(mockUser));
     return true;
   }
 
@@ -43,10 +45,15 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.currentUserKey);
+    return true; // Always consider the user logged in during development
   }
 
   get currentUserValue() {
     return JSON.parse(localStorage.getItem(this.currentUserKey) || 'null');
+  }
+
+  //  Optional: clear all users during dev testing
+  clearAllUsers(): void {
+    localStorage.removeItem(this.storageKey);
   }
 }

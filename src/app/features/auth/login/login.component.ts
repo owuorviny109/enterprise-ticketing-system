@@ -1,65 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-  AbstractControl
-} from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms'; // Use FormsModule instead of ReactiveFormsModule
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule]
+  imports: [CommonModule, FormsModule, RouterModule]
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  submitted = false;
-  loading = false;
-  error = '';
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+  error: string = '';
+  loading: boolean = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  onSubmit(): void {
-    this.submitted = true;
+  onLogin(): void {
     this.error = '';
 
-    if (this.loginForm.invalid) return;
+    if (!this.email || !this.password) {
+      this.error = 'Please enter both email and password.';
+      return;
+    }
 
     this.loading = true;
-    const { username, password } = this.loginForm.value;
 
-    this.http.post<any>('http://localhost:4200/api/login', {
-      username,
-      password
-    }).subscribe({
-      next: () => {
+    const payload = {
+      email: this.email,
+      password: this.password
+    };
+
+    this.http.post<any>('http://localhost:4200/api/login', payload).subscribe({
+      next: (response) => {
         alert('Login successful!');
         this.router.navigate(['/dashboard']);
       },
-      error: () => {
+      error: (err) => {
         this.loading = false;
-        this.error = 'Login failed. Check credentials and try again.';
+        this.error = 'Login failed. Please check your credentials.';
       }
     });
   }

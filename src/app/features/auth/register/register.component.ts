@@ -1,63 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule
-  ]
+  imports: [CommonModule, FormsModule],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-  registerForm!: FormGroup;
-  submitted = false;
-  loading = false;
+export class RegisterComponent {
+  firstName = '';
+  lastName = '';
+  email = '';
+  phone = '';
+  country = '';
+  city = '';
+  address = '';
+  password = '';
+  confirmPassword = '';
   error = '';
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  onRegister() {
+    if (this.password !== this.confirmPassword) {
+      this.error = 'Passwords do not match.';
+      return;
+    }
 
-  ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
-  }
+    const payload = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      phone: this.phone,
+      country: this.country,
+      city: this.city,
+      address: this.address,
+      password: this.password,
+    };
 
-  get f() {
-    return this.registerForm.controls;
-  }
-
-  onSubmit(): void {
-    this.submitted = true;
-    this.error = '';
-
-    if (this.registerForm.invalid) return;
-
-    this.loading = true;
-    const formData = this.registerForm.value;
-
-    this.http.post<any>('http://localhost:4200/api/register', formData).subscribe({
-      next: () => {
-        alert('Registration successful!');
-        this.router.navigate(['/login']);
-      },
-      error: () => {
-        this.loading = false;
-        this.error = 'Registration failed. Please check your details.';
-      }
-    });
+    console.log('Sending payload:', payload);
+    // TODO: hook into backend service/API
   }
 }
