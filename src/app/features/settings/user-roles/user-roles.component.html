@@ -22,12 +22,16 @@
       </div>
       
       <div class="search-right">
-        <button class="new-role-btn">Create a New Role</button>
+        <button class="new-role-btn" (click)="createNewRole()">Create a New Role</button>
       </div>
     </div>
 
     <div class="table-container">
-      <table class="roles-table">
+      <div *ngIf="isLoading" class="loading-state">
+        <p>Loading roles...</p>
+      </div>
+      
+      <table class="roles-table" *ngIf="!isLoading">
         <thead>
           <tr>
             <th>#ID</th>
@@ -42,7 +46,7 @@
             <td class="role-name">{{ role.name }}</td>
             <td class="role-slug">{{ role.slug }}</td>
             <td class="role-actions">
-              <button class="edit-btn">▶</button>
+              <button class="edit-btn" (click)="editRole(role)" title="Edit role">▶</button>
             </td>
           </tr>
         </tbody>

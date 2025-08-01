@@ -95,12 +95,16 @@ export const routes: Routes = [
 
   // User management routes with dashboard layout
   {
-    path: 'users',
+    path: 'manage-users',
     loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
     children: [
       {
         path: '',
         loadComponent: () => import('./features/manage-users/manage-users.component').then(m => m.ManageUsersComponent)
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./features/manage-users/create-user/create-user.component').then(m => m.CreateUserComponent)
       }
     ]
   },
