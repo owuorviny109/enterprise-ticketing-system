@@ -1,0 +1,42 @@
+<div class="header">
+  <!-- Sidebar area (empty space above logo) -->
+  <div class="header-sidebar-area"></div>
+  
+  <!-- Content area with greeting -->
+  <div class="header-content">
+    <div class="header-left">
+      <span class="greeting">{{ currentUser.greeting }}</span>
+      <span class="date-time">July 23rd 2024, 3:19 PM</span>
+    </div>
+
+    <div class="header-right">
+      <div class="language-selector" (click)="toggleLanguageDropdown()">
+        <span class="flag">🇬🇧</span>
+        <span>{{ currentUser.language }}</span>
+        <span class="dropdown-arrow">▼</span>
+        
+        <div *ngIf="showLanguageDropdown" class="dropdown-menu">
+          <div class="dropdown-item">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-section" (click)="toggleProfileDropdown()">
+        <span class="profile-name">{{ currentUser.name }}</span>
+        <span class="dropdown-arrow">▼</span>
+        
+        <div *ngIf="showProfileDropdown" class="dropdown-menu">
+          <div class="dropdown-item">Profile</div>
+          <div class="dropdown-item">Settings</div>
+          <div class="dropdown-item">Logout</div>
+        </div>
+      </div>
+
+      <div class="theme-toggle">
+        <button class="theme-btn">🌙</button>
+      </div>
+    </div>
+  </div>
+</div>
