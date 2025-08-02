@@ -1,0 +1,189 @@
+<!-- Hero Section -->
+<section class="hero">
+  <nav class="navbar">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <ul class="nav-links">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/services">Services</a></li>
+      <li><a routerLink="/faqs">FAQs</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+    </ul>
+    <button class="login-btn" routerLink="/login">Login</button>
+  </nav>
+
+  <div class="hero-content">
+    <h1>Effortless Ticketing: Submit, Track, and Resolve with Ease! CRM</h1>
+    <p>
+      We’re here to streamline the way you submit, track, and resolve tickets for all your needs. Whether it's technical
+      support, project assistance, or general inquiries, our ticketing system ensures a smooth and efficient process.
+    </p>
+
+    <div class="hero-actions">
+      <button routerLink="/login">Login CRM</button>
+      <button routerLink="/submit-ticket">Submit ticket</button>
+    </div>
+
+    <div class="hero-logos-wrapper">
+      <div class="hero-logos">
+        <img src="/logo.png" alt="President's Award Kenya" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+    <p class="label">Process</p>
+    <h2>How It Works</h2>
+    <p>Simple Steps to Get Your Requests Resolved</p>
+
+    <div class="steps">
+        <!-- Step 1 -->
+        <div>
+            <div class="step-icon">
+                <img class="icon" src="submit.png" alt="" />
+            </div>
+            <h3>Submit A ticket</h3>
+            <p>You can submit a ticket from the home page or dashboard after login. If you don't have login access you
+                can
+                create an account from this link.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div>
+            <div class="step-icon">
+                <img class="icon" src="email.png" alt="" />
+            </div>
+            <h3>Track progress with email</h3>
+            <p>You will get email progress when ticket status changes or you can comment and discuss with agent for a
+                particular ticket discussion.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div>
+            <div class="step-icon">
+                <img class="icon" src="done.png" alt="" />
+            </div>
+            <h3>Done and Close the ticket</h3>
+            <p>After marking a ticket as done, the agent will close the ticket and you would get notified when its
+                closed.</p>
+        </div>
+    </div>
+</section>
+<!-- Ticket Submission Form Section -->
+<section class="ticket-form-section">
+  <div class="container">
+
+    <!-- Success Message -->
+    <div class="success-message hidden">
+      <div class="success-content">
+        <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <h3>Ticket Submitted Successfully!</h3>
+      </div>
+    </div>
+
+    <!-- Ticket Form -->
+<div class="form-wrapper">
+    <div class="form-header">
+        <h2>Create a ticket</h2>
+    </div>
+
+    <form class="ticket-form">
+        <!-- Personal Info -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email address" required>
+            </div>
+        </div>
+
+        <!-- Subject and Type -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" placeholder="Brief description of your issue" required>
+            </div>
+            <div class="form-group">
+                <label for="ticketType">Ticket type</label>
+                <select id="ticketType" required>
+                    <option value="">Select a type</option>
+                    <option value="bug">Bug Report</option>
+                    <option value="feature">Feature Request</option>
+                    <option value="inquiry">General Inquiry</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Department -->
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label for="department">Department</label>
+                <select id="department" required>
+                    <option value="">Select a department</option>
+                    <option value="support">Support</option>
+                    <option value="billing">Billing</option>
+                    <option value="sales">Sales</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Request Details -->
+        <div class="form-group">
+            <label for="details">Request Details</label>
+            <div class="editor-toolbar">
+                <select class="format-select">
+                    <option>Paragraph</option>
+                </select>
+                <button type="button" class="toolbar-btn"><strong>B</strong></button>
+                <button type="button" class="toolbar-btn"><em>I</em></button>
+                <button type="button" class="toolbar-btn">U</button>
+                <button type="button" class="toolbar-btn">•</button>
+                <button type="button" class="toolbar-btn">1.</button>
+                <button type="button" class="toolbar-btn">⇥</button>
+                <button type="button" class="toolbar-btn">⇤</button>
+                <button type="button" class="toolbar-btn">⊞</button>
+                <button type="button" class="toolbar-btn">""</button>
+                <button type="button" class="toolbar-btn">🖼</button>
+                <button type="button" class="toolbar-btn">🔗</button>
+                <button type="button" class="toolbar-btn">↶</button>
+                <button type="button" class="toolbar-btn">↷</button>
+            </div>
+            <textarea id="details" name="details" rows="8" required></textarea>
+        </div>
+
+        <!-- File Attachment -->
+        <div class="form-group">
+          <label for="attachments">Attach files</label>
+          <input type="file" id="attachments" multiple>
+        </div>
+
+        <!-- Terms -->
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="agreeToTerms">
+            I agree with the <a href="#">terms and conditions</a>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

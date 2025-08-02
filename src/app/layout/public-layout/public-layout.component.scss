@@ -8,8 +8,7 @@
 
 // Header Styles
 .header {
-  background: #3b82f6;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #3b5bdb);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -20,64 +19,53 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
-}
+  padding: 18px 48px;
+  background: transparent;
 
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.logo {
-  height: 40px;
-  width: auto;
-}
-
-.brand-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-
-  &:hover,
-  &.active {
-    color: white;
-    background: rgba(255, 255, 255, 0.2);
+  .logo {
+    height: 36px;
   }
-}
 
-.btn-login {
-  background: white;
-  color: #3b82f6;
-  border: 2px solid white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-1px);
+    li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+
+      &:hover,
+      &.active {
+        background: rgba(255, 255, 255, 0.15);
+        color: #e0e0e0;
+      }
+    }
+  }
+
+  .login-btn {
+    background: #7b8ce7;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 24px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+    transition: background 0.2s;
+
+    &:hover {
+      background: #3b5bdb;
+    }
   }
 }
 
@@ -228,22 +216,19 @@
 }
 
 // Responsive Design
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .navbar {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
+    gap: 16px;
+    padding: 16px;
 
-  .nav-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+    .nav-links {
+      gap: 24px;
 
-  .nav-links a {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.95rem;
+      li a {
+        font-size: 0.95rem;
+      }
+    }
   }
 
   .footer-content {
@@ -257,31 +242,24 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .navbar {
-    padding: 0.75rem;
-  }
+    padding: 12px;
 
-  .brand-text {
-    font-size: 1rem;
-    color: white;
-  }
+    .nav-links {
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
 
-  .nav-links {
-    gap: 0.75rem;
-  }
+      li a {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+      }
+    }
 
-  .nav-links a {
-    font-size: 0.9rem;
-    color: white;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .btn-login {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    background: white;
-    color: #3b82f6;
-    border: 2px solid white;
+    .login-btn {
+      padding: 6px 20px;
+      font-size: 0.9rem;
+    }
   }
 }
