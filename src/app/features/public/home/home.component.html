@@ -1,5 +1,6 @@
 <!-- Hero Section -->
 <section class="hero">
+<<<<<<< HEAD
   <nav class="navbar">
     <img src="logo.png" alt="Logo" class="logo" />
     <ul class="nav-links">
@@ -15,12 +16,23 @@
     <h1>Effortless Ticketing: Submit, Track, and Resolve with Ease! CRM</h1>
     <p>
       We’re here to streamline the way you submit, track, and resolve tickets for all your needs. Whether it's technical
+=======
+  <div class="hero-content">
+    <h1>Effortless Ticketing: Submit, Track, and Resolve with Ease! CRM</h1>
+    <p>
+      We're here to streamline the way you submit, track, and resolve tickets for all your needs. Whether it's technical
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
       support, project assistance, or general inquiries, our ticketing system ensures a smooth and efficient process.
     </p>
 
     <div class="hero-actions">
+<<<<<<< HEAD
       <button routerLink="/login">Login CRM</button>
       <button routerLink="/submit-ticket">Submit ticket</button>
+=======
+      <button routerLink="/auth/login">Login CRM</button>
+      <button (click)="scrollToForm()">Submit ticket</button>
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
     </div>
 
     <div class="hero-logos-wrapper">
@@ -45,8 +57,12 @@
             </div>
             <h3>Submit A ticket</h3>
             <p>You can submit a ticket from the home page or dashboard after login. If you don't have login access you
+<<<<<<< HEAD
                 can
                 create an account from this link.</p>
+=======
+                can create an account from this link.</p>
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
         </div>
 
         <!-- Step 2 -->
@@ -70,12 +86,20 @@
         </div>
     </div>
 </section>
+<<<<<<< HEAD
+=======
+
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 <!-- Ticket Submission Form Section -->
 <section class="ticket-form-section">
   <div class="container">
 
     <!-- Success Message -->
+<<<<<<< HEAD
     <div class="success-message hidden">
+=======
+    <div class="success-message" [class.show]="showSuccess">
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
       <div class="success-content">
         <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
@@ -83,10 +107,15 @@
             stroke-linejoin="round" />
         </svg>
         <h3>Ticket Submitted Successfully!</h3>
+<<<<<<< HEAD
+=======
+        <p>Your ticket has been created and you will receive a confirmation email shortly with your ticket number.</p>
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
       </div>
     </div>
 
     <!-- Ticket Form -->
+<<<<<<< HEAD
 <div class="form-wrapper">
     <div class="form-header">
         <h2>Create a ticket</h2>
@@ -186,4 +215,163 @@
   </div>
 </section>
 
+=======
+    <div class="form-wrapper" *ngIf="!showSuccess">
+        <div class="form-header">
+            <h2>Create a ticket</h2>
+            <p>Submit your request and our team will get back to you as soon as possible.</p>
+        </div>
+
+        <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+            <!-- Personal Info -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" id="firstName" formControlName="firstName" [class.error]="getFieldError('firstName')" placeholder="Enter your first name">
+                    <div class="error-message" *ngIf="getFieldError('firstName')">
+                      {{ getFieldError('firstName') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" id="lastName" formControlName="lastName" [class.error]="getFieldError('lastName')" placeholder="Enter your last name">
+                    <div class="error-message" *ngIf="getFieldError('lastName')">
+                      {{ getFieldError('lastName') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" formControlName="email" [class.error]="getFieldError('email')" placeholder="Enter your email address">
+                    <div class="error-message" *ngIf="getFieldError('email')">
+                      {{ getFieldError('email') }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject and Type -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" formControlName="subject" [class.error]="getFieldError('subject')" placeholder="Brief description of your issue">
+                    <div class="error-message" *ngIf="getFieldError('subject')">
+                      {{ getFieldError('subject') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ticketType">Ticket type</label>
+                    <select id="ticketType" formControlName="ticketType" [class.error]="getFieldError('ticketType')">
+                        <option value="">Select a type</option>
+                        <option *ngFor="let type of ticketTypes" [value]="type">{{ type }}</option>
+                    </select>
+                    <div class="error-message" *ngIf="getFieldError('ticketType')">
+                      {{ getFieldError('ticketType') }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="department">Department</label>
+                    <select id="department" formControlName="department" [class.error]="getFieldError('department')">
+                        <option value="">Select a department</option>
+                        <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+                    </select>
+                    <div class="error-message" *ngIf="getFieldError('department')">
+                      {{ getFieldError('department') }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Details -->
+            <div class="form-group">
+                <label for="requestDetails">Request Details</label>
+                <div class="editor-toolbar">
+                    <select class="format-select">
+                        <option>Paragraph</option>
+                    </select>
+                    <button type="button" class="toolbar-btn"><strong>B</strong></button>
+                    <button type="button" class="toolbar-btn"><em>I</em></button>
+                    <button type="button" class="toolbar-btn">U</button>
+                    <button type="button" class="toolbar-btn">•</button>
+                    <button type="button" class="toolbar-btn">1.</button>
+                    <button type="button" class="toolbar-btn">⇥</button>
+                    <button type="button" class="toolbar-btn">⇤</button>
+                    <button type="button" class="toolbar-btn">⊞</button>
+                    <button type="button" class="toolbar-btn">""</button>
+                    <button type="button" class="toolbar-btn">🖼</button>
+                    <button type="button" class="toolbar-btn">🔗</button>
+                    <button type="button" class="toolbar-btn">↶</button>
+                    <button type="button" class="toolbar-btn">↷</button>
+                </div>
+                <textarea id="requestDetails" formControlName="requestDetails" [class.error]="getFieldError('requestDetails')" placeholder="Please provide detailed information about your request..." rows="8"></textarea>
+                <div class="error-message" *ngIf="getFieldError('requestDetails')">
+                  {{ getFieldError('requestDetails') }}
+                </div>
+            </div>
+
+            <!-- File Attachment -->
+            <div class="form-group">
+              <label for="attachments">Attach files</label>
+              <div class="file-upload-area">
+                <input type="file" id="attachments" (change)="onFileSelected($event)" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt" class="file-input">
+                <label for="attachments" class="file-upload-label">
+                  <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span>Attach files</span>
+                </label>
+              </div>
+              <div class="error-message" *ngFor="let message of fileUploadMessages">
+                {{ message }}
+              </div>
+              <!-- Display selected files -->
+              <div class="selected-files" *ngIf="ticketForm.get('attachments')?.value?.length > 0">
+                <div class="file-item" *ngFor="let file of ticketForm.get('attachments')?.value">
+                  <span class="file-name">{{ file.name }}</span>
+                  <button type="button" class="remove-file-btn" (click)="onFileRemove(file)">×</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms -->
+            <div class="form-group">
+              <div class="checkbox-group">
+                <input type="checkbox" id="agreeToTerms" formControlName="agreeToTerms" [class.error]="getFieldError('agreeToTerms')">
+                <label for="agreeToTerms">
+                  I agree with the <a href="#" class="terms-link">terms and conditions</a>
+                </label>
+              </div>
+              <div class="error-message" *ngIf="getFieldError('agreeToTerms')">
+                You must agree to the terms and conditions
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-actions">
+              <button type="submit" class="submit-btn" [disabled]="isSubmitting" [class.loading]="isSubmitting">
+                <span *ngIf="!isSubmitting">Submit</span>
+                <span *ngIf="isSubmitting" class="loading-text">
+                  <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"
+                      stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                      <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416"
+                        repeatCount="indefinite" />
+                      <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416"
+                        repeatCount="indefinite" />
+                    </circle>
+                  </svg>
+                  Submitting...
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+  </div>
+</section>
+
+<!-- Footer -->
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 <app-footer></app-footer>

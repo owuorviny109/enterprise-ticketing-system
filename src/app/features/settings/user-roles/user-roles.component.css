@@ -162,6 +162,16 @@
   color: #6f42c1;
 }
 
+<<<<<<< HEAD
+=======
+.loading-state {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 @media (max-width: 768px) {
   .search-section {
     flex-direction: column;

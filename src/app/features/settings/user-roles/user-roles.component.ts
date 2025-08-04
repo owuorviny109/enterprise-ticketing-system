@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+=======
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RoleService, Role } from '../services/role.service';
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 
 @Component({
   selector: 'app-user-roles',
@@ -9,6 +16,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './user-roles.component.html',
   styleUrls: ['./user-roles.component.css']
 })
+<<<<<<< HEAD
 export class UserRolesComponent {
   searchTerm = '';
   roles = [
@@ -17,6 +25,34 @@ export class UserRolesComponent {
     { id: 4, name: 'Staff', slug: 'Staff' }
   ];
   filteredRoles = [...this.roles];
+=======
+export class UserRolesComponent implements OnInit {
+  searchTerm = '';
+  roles: Role[] = [];
+  filteredRoles: Role[] = [];
+  isLoading = false;
+
+  constructor(private roleService: RoleService) {}
+
+  ngOnInit(): void {
+    this.loadRoles();
+  }
+
+  loadRoles(): void {
+    this.isLoading = true;
+    this.roleService.getRoles().subscribe({
+      next: (roles) => {
+        this.roles = roles;
+        this.filteredRoles = [...roles];
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading roles:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 
   applySearch() {
     this.filteredRoles = this.roles.filter(role =>
@@ -29,4 +65,17 @@ export class UserRolesComponent {
     this.searchTerm = '';
     this.filteredRoles = [...this.roles];
   }
+<<<<<<< HEAD
+=======
+
+  createNewRole() {
+    // TODO: Implement create new role functionality
+    console.log('Create new role clicked');
+  }
+
+  editRole(role: Role) {
+    // TODO: Implement edit role functionality
+    console.log('Edit role clicked:', role);
+  }
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 }

@@ -130,7 +130,11 @@
 }
 
 .hero-logos img {
+<<<<<<< HEAD
   height: 70px;
+=======
+  height: 80px;
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 }
 
 /* How It Works Section */
@@ -146,7 +150,10 @@
   font-weight: 600;
   font-size: 1rem;
   margin: 0;
+<<<<<<< HEAD
   padding-left: 24px;
+=======
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 }
 
 .how-it-works h2 {
@@ -154,17 +161,27 @@
   font-size: 2.2rem;
   font-weight: 700;
   margin: 0;
+<<<<<<< HEAD
   padding-left: 24px;
 
 }
 
 .how-it-works>p {
+=======
+ ;
+}
+
+.how-it-works > p {
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   font-size: 1.08rem;
   color: #444;
   margin-top: 0;
   margin-bottom: 20px;
+<<<<<<< HEAD
   padding-left: 24px;
 
+=======
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 }
 
 .steps {
@@ -173,14 +190,22 @@
   flex-wrap: wrap;
 }
 
+<<<<<<< HEAD
 .steps>div {
+=======
+.steps > div {
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   border-radius: 18px;
   padding: 32px 24px;
   width: 270px;
   transition: box-shadow 0.2s;
 }
 
+<<<<<<< HEAD
 .steps>div:hover {
+=======
+.steps > div:hover {
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   box-shadow: 0 4px 24px rgba(60, 60, 120, 0.12);
 }
 
@@ -200,6 +225,7 @@
   color: #555;
   line-height: 1.5;
 }
+<<<<<<< HEAD
 
 /* Rectangle-based Flower Step Icons */
 .step-icon {
@@ -257,6 +283,33 @@
   z-index: 2;
   transform: translateY(8px);
 }
+=======
+.blob-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0%;
+}
+
+.blob-container svg {
+  width: 140px;
+  height: 140px;
+  display: block;
+}
+
+.blob-container .icon {
+  width: 36px; 
+  height: 36px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(13%, -65%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 /* Ticket Submission Form Section  */
 .container {
   max-width: 840px;
@@ -374,6 +427,7 @@ input[type="file"] {
   color: #2e7d32;
 }
 
+<<<<<<< HEAD
 /* Request Details Editor Styling */
 .editor-toolbar {
   display: flex;
@@ -439,6 +493,9 @@ textarea:focus {
   border-color: #3b5bdb;
   outline: none;
 }
+=======
+
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
 /* Responsive Design */
 @media (max-width: 900px) {
   .navbar {

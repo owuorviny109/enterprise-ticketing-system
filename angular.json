@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+<<<<<<< HEAD
     "support-ticket-crm": {
       "projectType": "application",
       "schematics": {},
+=======
+    "enterprise-ticketing-system-temp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -18,6 +28,10 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+<<<<<<< HEAD
+=======
+            "inlineStyleLanguage": "scss",
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
             "assets": [
               {
                 "glob": "**/*",
@@ -25,7 +39,11 @@
               }
             ],
             "styles": [
+<<<<<<< HEAD
               "src/styles.css"
+=======
+              "src/styles.scss"
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
             ]
           },
           "configurations": {
@@ -56,10 +74,17 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
+<<<<<<< HEAD
               "buildTarget": "support-ticket-crm:build:production"
             },
             "development": {
               "buildTarget": "support-ticket-crm:build:development"
+=======
+              "buildTarget": "enterprise-ticketing-system-temp:build:production"
+            },
+            "development": {
+              "buildTarget": "enterprise-ticketing-system-temp:build:development"
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
             }
           },
           "defaultConfiguration": "development"
@@ -75,6 +100,10 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+<<<<<<< HEAD
+=======
+            "inlineStyleLanguage": "scss",
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
             "assets": [
               {
                 "glob": "**/*",
@@ -82,7 +111,11 @@
               }
             ],
             "styles": [
+<<<<<<< HEAD
               "src/styles.css"
+=======
+              "src/styles.scss"
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
             ]
           }
         }

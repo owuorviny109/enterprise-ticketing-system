@@ -13,7 +13,24 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
+<<<<<<< HEAD
     "module": "preserve"
+=======
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@app/*": ["src/app/*"]
+    }
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -23,8 +40,12 @@
     "strictTemplates": true
   },
   "files": [],
+<<<<<<< HEAD
   "references": [
     {
+=======
+  "references": [{
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
       "path": "./tsconfig.app.json"
     },
     {
