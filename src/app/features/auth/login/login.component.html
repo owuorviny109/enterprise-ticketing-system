@@ -1,0 +1,85 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Welcome Back</h1>
+      <p>Sign in to your account to continue</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form">
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          [(ngModel)]="email"
+          required
+          placeholder="Enter your email address"
+          [class.error]="!email && loginForm.submitted"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Enter your password"
+          [class.error]="!password && loginForm.submitted"
+        />
+      </div>
+
+      <!-- Remember Me -->
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="rememberMe" name="rememberMe" />
+          <label for="rememberMe">Remember me</label>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="loading"
+          [class.loading]="loading"
+        >
+          <span *ngIf="!loading">Sign In</span>
+          <span *ngIf="loading" class="loading-text">
+            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416"
+                  repeatCount="indefinite" />
+                <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416"
+                  repeatCount="indefinite" />
+              </circle>
+            </svg>
+            Signing In...
+          </span>
+        </button>
+      </div>
+
+      <!-- Links -->
+      <div class="auth-links">
+        <div class="forgot-password">
+          <a routerLink="/auth/forgot-password" class="link">Forgot your password?</a>
+        </div>
+        <div class="register-link">
+          <p>Don't have an account? <a routerLink="/auth/register" class="link">Create one here</a></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
