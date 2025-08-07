@@ -113,14 +113,20 @@
 
 ## Phase 4: User and Role Management
 
-- [ ] 11. Implement user roles management
+- [x] 11. Implement user roles management
+
+
+
   - Create user roles list component in features/settings/
   - Display roles table with ID, Name, Slug columns
   - Add search functionality and "Create a New Role" button
   - Implement role editing and permission management
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
-- [ ] 12. Build user management interface
+- [x] 12. Build user management interface
+
+
+
   - Create user creation form in features/manage-users/
   - Add form fields: First name, Last name, Email, Phone, City, Address, Country, Password
   - Implement role dropdown selection (Admin, Customer, Staff)

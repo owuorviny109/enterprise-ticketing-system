@@ -1,0 +1,184 @@
+<div class="create-user-container">
+  <div class="header">
+    <h1>Create a new user</h1>
+    <nav class="breadcrumb">
+      <span class="breadcrumb-item">🏠</span>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-item">Users</span>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-item active">Create a new user</span>
+    </nav>
+  </div>
+
+  <div class="form-container">
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form" *ngIf="userForm">
+      <!-- First Row: First name, Last name, Email -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First name</label>
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            class="form-control"
+            [class.error]="isFieldInvalid('firstName')"
+            placeholder="Enter first name"
+          />
+          <div class="error-message" *ngIf="isFieldInvalid('firstName')">
+            {{ getFieldError('firstName') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last name</label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            class="form-control"
+            [class.error]="isFieldInvalid('lastName')"
+            placeholder="Enter last name"
+          />
+          <div class="error-message" *ngIf="isFieldInvalid('lastName')">
+            {{ getFieldError('lastName') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control"
+            [class.error]="isFieldInvalid('email')"
+            placeholder="Enter email address"
+          />
+          <div class="error-message" *ngIf="isFieldInvalid('email')">
+            {{ getFieldError('email') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Row: Phone, City -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            class="form-control"
+            placeholder="Enter phone number"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            id="city"
+            formControlName="city"
+            class="form-control"
+            placeholder="Enter city"
+          />
+        </div>
+
+        <div class="form-group empty"></div>
+      </div>
+
+      <!-- Third Row: Address, Country, Password -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            id="address"
+            formControlName="address"
+            class="form-control"
+            placeholder="Enter address"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input
+            type="text"
+            id="country"
+            formControlName="country"
+            class="form-control"
+            placeholder="Enter country"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control"
+            [class.error]="isFieldInvalid('password')"
+            placeholder="Enter password"
+          />
+          <div class="error-message" *ngIf="isFieldInvalid('password')">
+            {{ getFieldError('password') }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Fourth Row: Role, Photo -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select
+            id="role"
+            formControlName="role"
+            class="form-control"
+            [class.error]="isFieldInvalid('role')"
+          >
+            <option value="" disabled>Select role</option>
+            <option *ngFor="let role of userRoles" [value]="role">
+              {{ role }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="isFieldInvalid('role')">
+            {{ getFieldError('role') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Photo</label>
+          <div class="photo-upload">
+            <input
+              type="file"
+              id="photo"
+              accept="image/*"
+              (change)="onPhotoSelected($event)"
+              class="file-input"
+            />
+            <button type="button" class="browse-btn" onclick="document.getElementById('photo')?.click()">
+              Browse
+            </button>
+            <span class="file-name" *ngIf="selectedPhoto">{{ selectedPhoto.name }}</span>
+          </div>
+        </div>
+
+        <div class="form-group empty"></div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="create-btn"
+          [disabled]="isSubmitting"
+        >
+          <span *ngIf="isSubmitting">Creating...</span>
+          <span *ngIf="!isSubmitting">Create User</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

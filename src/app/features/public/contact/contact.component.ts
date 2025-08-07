@@ -1,89 +1,63 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TicketFormComponent, TicketFormConfig } from '../../../shared/components/ticket-form/ticket-form.component';
 
+/**
+ * Public contact/ticket submission page
+ * Used by non-authenticated users to create tickets
+ */
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './contact.component.html',
+  imports: [CommonModule, TicketFormComponent],
+  template: `
+    <app-ticket-form 
+      [config]="formConfig"
+      [initialData]="initialData"
+      (formSubmit)="onTicketSubmit($event)">
+    </app-ticket-form>
+  `,
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-  ticketForm: FormGroup;
-  isSubmitting = false;
-  showSuccess = false;
+  // Public form configuration - shows personal info fields
+  formConfig: TicketFormConfig = {
+    mode: 'public',
+    showPersonalInfo: true,
+    showPriority: false,
+    showAssignment: false,
+    submitButtonText: 'Submit',
+    title: 'Create a ticket',
+    description: 'Submit your request and our team will get back to you as soon as possible.'
+  };
 
-  ticketTypes = [
-    'General Inquiry',
-    'Award Progression',
-    'Certificate Request',
-    'Registration Issue',
-    'Complaint or Grievance',
-    'Technical Support'
-  ];
+  // Empty for now - will be used for pre-filling when authentication is implemented
+  initialData: any = {};
 
-  departments = [
-    'Admin',
-    'ICT',
-    'Finance',
-    'Program Management',
-    'Customer Service'
-  ];
-
-  constructor(private fb: FormBuilder) {
-    this.ticketForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      subject: ['', [Validators.required, Validators.minLength(5)]],
-      ticketType: ['', Validators.required],
-      department: ['', Validators.required],
-      requestDetails: ['', [Validators.required, Validators.minLength(10)]],
-      attachments: [null],
-      agreeToTerms: [false, Validators.requiredTrue]
-    });
-  }
-
-  onFileSelect(event: any) {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      this.ticketForm.patchValue({
-        attachments: files
-      });
-    }
-  }
-
-  onSubmit() {
-    if (this.ticketForm.valid) {
-      this.isSubmitting = true;
+  /**
+   * Handle ticket submission from public users
+   * Currently saves to localStorage - replace with API call when backend is ready
+   */
+  onTicketSubmit(event: any) {
+    const { formData, onSuccess, onError } = event;
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      console.log('Public ticket submitted:', formData);
       
-      // Simulate API call
-      setTimeout(() => {
-        this.isSubmitting = false;
-        this.showSuccess = true;
-        this.ticketForm.reset();
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          this.showSuccess = false;
-        }, 5000);
-      }, 2000);
-    } else {
-      // Mark all fields as touched to show validation errors
-      Object.keys(this.ticketForm.controls).forEach(key => {
-        this.ticketForm.get(key)?.markAsTouched();
-      });
-    }
-  }
-
-  getFieldError(fieldName: string): string {
-    const field = this.ticketForm.get(fieldName);
-    if (field?.errors && field.touched) {
-      if (field.errors['required']) return `${fieldName} is required`;
-      if (field.errors['email']) return 'Please enter a valid email address';
-      if (field.errors['minlength']) return `${fieldName} is too short`;
-    }
-    return '';
+      // Temporary storage in localStorage until backend is implemented
+      const tickets = JSON.parse(localStorage.getItem('tickets') || '[]');
+      const newTicket = {
+        id: Date.now().toString(),
+        key: '#' + Math.floor(100000 + Math.random() * 900000),
+        ...formData,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+      tickets.push(newTicket);
+      localStorage.setItem('tickets', JSON.stringify(tickets));
+      
+      onSuccess();
+    }, 2000);
   }
 }

@@ -1,35 +1,13 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { map, tap, delay } from 'rxjs/operators';
+import { Ticket, CreateTicketRequest, TicketListResponse } from '../../../models/ticket.model';
 
-// Types for better type safety
-export interface Ticket {
-  id: string;
-  key: string;
-  subject: string;
-  description: string;
-  type: string;
-  priority: 'low' | 'normal' | 'high' | 'urgent';
-  status: 'pending' | 'open' | 'in_progress' | 'resolved' | 'closed';
-  department: string;
-  customerId: string;
-  assignedTo?: string;
-  organizationId?: string;
-  attachments?: string[];
-  createdAt: Date;
-  updatedAt: Date;
-  resolvedAt?: Date;
-}
+// Export types for use in other components
+export type { Ticket, CreateTicketRequest, TicketListResponse } from '../../../models/ticket.model';
 
-export interface CreateTicketRequest {
-  subject: string;
-  description: string;
-  priority: Ticket['priority'];
-  department: string;
-  type?: string;
-}
-
+// Additional service-specific types
 export interface TicketFilter {
   status?: Ticket['status'];
   priority?: Ticket['priority'];
@@ -38,13 +16,6 @@ export interface TicketFilter {
   search?: string;
   page?: number;
   limit?: number;
-}
-
-export interface TicketResponse {
-  tickets: Ticket[];
-  total: number;
-  page: number;
-  limit: number;
 }
 
 @Injectable({
@@ -69,12 +40,12 @@ export class TicketService {
   /**
    * Get tickets with optional filtering and pagination
    */
-  getTickets(filter: TicketFilter = {}): Observable<TicketResponse> {
+  getTickets(filter: TicketFilter = {}): Observable<TicketListResponse> {
     this.loadingSubject.next(true);
     
     const params = this.buildQueryParams(filter);
     
-    return this.http.get<TicketResponse>(`${this.baseUrl}`, { params })
+    return this.http.get<TicketListResponse>(`${this.baseUrl}`, { params })
       .pipe(
         tap(response => {
           this.ticketsSubject.next(response.tickets);
@@ -100,16 +71,49 @@ export class TicketService {
   createTicket(ticketData: CreateTicketRequest): Observable<Ticket> {
     this.loadingSubject.next(true);
     
-    return this.http.post<Ticket>(this.baseUrl, ticketData)
-      .pipe(
-        tap(newTicket => {
-          // Add to current tickets list
-          const currentTickets = this.ticketsSubject.value;
-          this.ticketsSubject.next([newTicket, ...currentTickets]);
-          this.totalCount.update(count => count + 1);
-          this.loadingSubject.next(false);
-        })
-      );
+    // For now, simulate API call with mock data
+    // Later replace with actual HTTP call
+    const mockTicket: Ticket = {
+      id: this.generateId(),
+      key: this.generateTicketKey(),
+      subject: ticketData.subject,
+      description: ticketData.requestDetails,
+      type: ticketData.ticketType,
+      priority: ticketData.priority || 'normal',
+      status: 'pending',
+      department: ticketData.department,
+      customerId: ticketData.email || 'anonymous',
+      assignedTo: ticketData.assignedTo,
+      attachments: [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    // Simulate API delay
+    return of(mockTicket).pipe(
+      delay(1500),
+      tap(newTicket => {
+        // Add to current tickets list
+        const currentTickets = this.ticketsSubject.value;
+        this.ticketsSubject.next([newTicket, ...currentTickets]);
+        this.totalCount.update(count => count + 1);
+        this.loadingSubject.next(false);
+      })
+    );
+  }
+
+  /**
+   * Generate unique ticket ID
+   */
+  private generateId(): string {
+    return 'ticket_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  /**
+   * Generate ticket key like #838819
+   */
+  private generateTicketKey(): string {
+    return '#' + Math.floor(100000 + Math.random() * 900000).toString();
   }
 
   /**

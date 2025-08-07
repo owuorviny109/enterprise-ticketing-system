@@ -162,6 +162,13 @@
   color: #6f42c1;
 }
 
+.loading-state {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
   .search-section {
     flex-direction: column;
