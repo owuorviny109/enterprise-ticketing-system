@@ -1,1 +1,28 @@
- 
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 250px; // Account for fixed sidebar width
+  margin-top: 70px;   // Account for fixed header height
+  padding: 20px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 70px);
+  overflow-x: auto;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 15px;
+  }
+  
+  // Hide sidebar on mobile or make it collapsible
+  .dashboard-layout {
+    position: relative;
+  }
+}

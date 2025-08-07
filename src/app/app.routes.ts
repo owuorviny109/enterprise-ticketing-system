@@ -24,7 +24,7 @@ export const routes: Routes = [
       },
       {
         path: 'submit-ticket',
-        loadComponent: () => import('./features/public/ticket-form/ticket-form.component').then(m => m.TicketFormComponent)
+        loadComponent: () => import('./features/public/contact/contact.component').then(m => m.ContactComponent)
       },
     ]
   },
