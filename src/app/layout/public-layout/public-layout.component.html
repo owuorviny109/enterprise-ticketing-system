@@ -1,0 +1,24 @@
+<div class="public-layout">
+  <!-- Header Navigation -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="nav-brand">
+        <img src="assets/images/image.png" alt="The President's Award - Kenya" class="logo">
+      </div>
+      <div class="nav-links">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+        <a routerLink="/services" routerLinkActive="active">Services</a>
+        <a routerLink="/faqs" routerLinkActive="active">FAQs</a>
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        <button class="btn-login" routerLink="/auth/login">Login</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+
+</div>

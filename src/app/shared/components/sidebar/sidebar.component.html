@@ -1,0 +1,33 @@
+<div class="sidebar">
+  <!-- Logo Section -->
+  <div class="sidebar-logo">
+    <img src="/logo.png" alt="Logo" class="logo">
+  </div>
+  
+  <div class="sidebar-content">
+    <ul class="menu-list">
+      <li *ngFor="let item of menuItems" class="menu-item">
+        <a 
+          [routerLink]="item.route" 
+          class="menu-link"
+          [class.active]="item.active"
+          (click)="item.expandable && item.label === 'Settings' ? toggleSettings() : null"
+        >
+          <span class="menu-icon">{{ item.icon }}</span>
+          <span class="menu-label">{{ item.label }}</span>
+          <span *ngIf="item.expandable" class="expand-icon">
+            {{ item.label === 'Settings' && expandedSettings ? '▼' : '▶' }}
+          </span>
+        </a>
+        
+        <ul *ngIf="item.label === 'Settings' && expandedSettings" class="submenu">
+          <li *ngFor="let subItem of settingsSubItems" class="submenu-item">
+            <a [routerLink]="subItem.route" class="submenu-link">
+              {{ subItem.label }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

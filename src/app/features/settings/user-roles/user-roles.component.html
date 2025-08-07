@@ -1,0 +1,52 @@
+<div class="user-roles-page">
+  <div class="page-header">
+    <h1>User Roles</h1>
+    <div class="breadcrumb">
+      <span>🏠</span>
+      <span>/</span>
+      <span>User Roles</span>
+    </div>
+  </div>
+
+  <div class="roles-container">
+    <div class="search-section">
+      <div class="search-left">
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          [(ngModel)]="searchTerm"
+          (input)="applySearch()"
+          class="search-input"
+        >
+        <button class="reset-btn" (click)="resetSearch()">Reset</button>
+      </div>
+      
+      <div class="search-right">
+        <button class="new-role-btn">Create a New Role</button>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="roles-table">
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Name</th>
+            <th>Slug</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let role of filteredRoles" class="role-row">
+            <td class="role-id">{{ role.id }}</td>
+            <td class="role-name">{{ role.name }}</td>
+            <td class="role-slug">{{ role.slug }}</td>
+            <td class="role-actions">
+              <button class="edit-btn">▶</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

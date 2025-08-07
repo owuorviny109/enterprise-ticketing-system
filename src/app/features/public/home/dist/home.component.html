@@ -1,0 +1,271 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Effortless Ticketing: Submit, Track, and Resolve with Ease! CRM</h1>
+      <p>We're here to streamline the way you submit, track, and resolve 
+        tickets for all your needs. Whether it's technical support, project assistance, or general inquiries, our ticketing system 
+        ensures a smooth and efficient progress.</p>
+      <div class="hero-buttons">
+        <button class="btn-login-crm" routerLink="/auth/login">Login CRM</button>
+        <button class="btn-submit-ticket" (click)="scrollToForm()">Submit ticket</button>
+      </div>
+    </div>
+     
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Process</span>
+      <h2>How It Works</h2>
+      <p class="section-subtitle">Simple Steps to Get Your Requests Resolved</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2Z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M10 9H9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3>Submit A ticket</h3>
+        <p>You can submit ticket from this home page or dashboard after login. If you don't have login access you can
+          create account from this link.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3>Track progress with email</h3>
+        <p>You will get email progress when change ticket status or you can comment and discuss with agent for a
+          particular ticket discussion.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3>Done and Close the ticket</h3>
+        <p>After marking done a ticket agent will close the ticket and you would get notified when its closed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ticket Submission Form Section -->
+<section class="ticket-form-section">
+  <div class="container">
+    <!-- Success Message -->
+    <div class="success-message" *ngIf="showSuccess">
+      <div class="success-content">
+        <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <h3>Ticket Submitted Successfully!</h3>
+        <p>Your ticket has been created and you will receive a confirmation email shortly with your ticket number.</p>
+      </div>
+    </div>
+
+    <!-- Ticket Form -->
+    <div class="form-wrapper" *ngIf="!showSuccess">
+      <div class="form-header">
+        <h2>Create a ticket</h2>
+        <p>Submit your request and our team will get back to you as soon as possible.</p>
+      </div>
+
+      <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+        <!-- Personal Information Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" formControlName="firstName" [class.error]="getFieldError('firstName')"
+              placeholder="Enter your first name">
+            <div class="error-message" *ngIf="getFieldError('firstName')">
+              {{ getFieldError('firstName') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" formControlName="lastName" [class.error]="getFieldError('lastName')"
+              placeholder="Enter your last name">
+            <div class="error-message" *ngIf="getFieldError('lastName')">
+              {{ getFieldError('lastName') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" formControlName="email" [class.error]="getFieldError('email')"
+              placeholder="Enter your email address">
+            <div class="error-message" *ngIf="getFieldError('email')">
+              {{ getFieldError('email') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Subject and Type Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" formControlName="subject" [class.error]="getFieldError('subject')"
+              placeholder="Brief description of your issue">
+            <div class="error-message" *ngIf="getFieldError('subject')">
+              {{ getFieldError('subject') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ticketType">Ticket type</label>
+            <select id="ticketType" formControlName="ticketType" [class.error]="getFieldError('ticketType')">
+              <option value="">Select a type</option>
+              <option *ngFor="let type of ticketTypes" [value]="type">{{ type }}</option>
+            </select>
+            <div class="error-message" *ngIf="getFieldError('ticketType')">
+              {{ getFieldError('ticketType') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Department -->
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="department">Department</label>
+            <select id="department" formControlName="department" [class.error]="getFieldError('department')">
+              <option value="">Select a department</option>
+              <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+            </select>
+            <div class="error-message" *ngIf="getFieldError('department')">
+              {{ getFieldError('department') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Request Details -->
+        <div class="form-group">
+          <label for="requestDetails">Request Details</label>
+          <div class="rich-text-toolbar">
+            <button type="button" class="toolbar-btn" title="Paragraph">
+              <span>Paragraph</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="toolbar-divider"></div>
+            <button type="button" class="toolbar-btn" title="Bold">
+              <strong>B</strong>
+            </button>
+            <button type="button" class="toolbar-btn" title="Italic">
+              <em>I</em>
+            </button>
+            <button type="button" class="toolbar-btn" title="Underline">
+              <u>U</u>
+            </button>
+            <div class="toolbar-divider"></div>
+            <button type="button" class="toolbar-btn" title="Bullet List">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <line x1="8" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="8" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" />
+                <line x1="3" y1="6" x2="3.01" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="3" y1="12" x2="3.01" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="3" y1="18" x2="3.01" y2="18" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </button>
+            <button type="button" class="toolbar-btn" title="Numbered List">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <line x1="10" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" />
+                <line x1="10" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" />
+                <line x1="10" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" />
+                <path d="M4 6H2V4L4 4V6Z" stroke="currentColor" stroke-width="2" />
+                <path d="M4 12H2V10L4 10V12Z" stroke="currentColor" stroke-width="2" />
+                <path d="M4 18H2V16L4 16V18Z" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </button>
+          </div>
+          <textarea id="requestDetails" formControlName="requestDetails" [class.error]="getFieldError('requestDetails')"
+            placeholder="Please provide detailed information about your request..." rows="6"></textarea>
+          <div class="error-message" *ngIf="getFieldError('requestDetails')">
+            {{ getFieldError('requestDetails') }}
+          </div>
+        </div>
+
+        <!-- File Attachment -->
+        <div class="form-group">
+          <div class="file-upload-area">
+            <input type="file" id="attachments" (change)="onFileSelected($event)" multiple
+              accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt" class="file-input">
+            <label for="attachments" class="file-upload-label">
+              <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span>Attach files</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="agreeToTerms" formControlName="agreeToTerms"
+              [class.error]="getFieldError('agreeToTerms')">
+            <label for="agreeToTerms">
+              I agree with the <a href="#" class="terms-link">terms and conditions</a>
+            </label>
+          </div>
+          <div class="error-message" *ngIf="getFieldError('agreeToTerms')">
+            You must agree to the terms and conditions
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting" [class.loading]="isSubmitting">
+            <span *ngIf="!isSubmitting">Submit</span>
+            <span *ngIf="isSubmitting" class="loading-text">
+              <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                  <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416"
+                    repeatCount="indefinite" />
+                  <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416"
+                    repeatCount="indefinite" />
+                </circle>
+              </svg>
+              Submitting...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

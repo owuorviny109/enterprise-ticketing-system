@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\features",
+    "\\src\\app\\features\\customers",
+    "\\src\\app\\features\\manage-users"
+  ],
+  "SelectedNode": "\\src\\app\\features\\manage-users\\manage-users.component.ts",
+  "PreviewInSolutionExplorer": false
+}

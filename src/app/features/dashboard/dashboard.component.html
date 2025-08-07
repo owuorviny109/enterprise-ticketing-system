@@ -1,0 +1,312 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <div class="breadcrumb">
+      <span>🏠</span>
+      <span>/</span>
+      <span>Dashboard</span>
+    </div>
+  </div>
+
+  <!-- Metrics Cards -->
+  <div class="metrics-grid">
+    <!-- New Tickets -->
+    <div class="metric-card new-tickets">
+      <div class="metric-content">
+        <div class="metric-header">
+          <h3>NEW TICKETS</h3>
+        </div>
+        <div class="metric-value">0</div>
+        <div class="metric-percentage">
+          <div class="percentage-circle">
+            <span>0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Open Tickets -->
+    <div class="metric-card open-tickets">
+      <div class="metric-content">
+        <div class="metric-header">
+          <h3>OPEN TICKETS</h3>
+        </div>
+        <div class="metric-value">22</div>
+        <div class="metric-percentage">
+          <div class="percentage-circle open-circle">
+            <svg class="progress-ring" width="60" height="60">
+              <circle class="progress-ring-circle" stroke="#8b5cf6" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" 
+                      stroke-dasharray="163.36" stroke-dashoffset="14.7" transform="rotate(-90 30 30)"/>
+            </svg>
+            <span class="percentage-text">91%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closed Tickets -->
+    <div class="metric-card closed-tickets">
+      <div class="metric-content">
+        <div class="metric-header">
+          <h3>CLOSED TICKETS</h3>
+          <div class="metric-icon">📊</div>
+        </div>
+        <div class="metric-value">2</div>
+        <div class="metric-percentage">
+          <div class="percentage-circle">
+            <span>8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unassigned Tickets -->
+    <div class="metric-card unassigned-tickets">
+      <div class="metric-content">
+        <div class="metric-header">
+          <h3>UNASSIGNED TICKETS</h3>
+        </div>
+        <div class="metric-value">18</div>
+        <div class="metric-percentage">
+          <div class="percentage-circle unassigned-circle">
+            <svg class="progress-ring" width="60" height="60">
+              <circle class="progress-ring-circle" stroke="#8b5cf6" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" 
+                      stroke-dasharray="163.36" stroke-dashoffset="40.84" transform="rotate(-90 30 30)"/>
+            </svg>
+            <span class="percentage-text">75%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <div class="chart-row">
+      <!-- Ticket by Department -->
+      <div class="chart-card">
+        <h3>Ticket by department</h3>
+        <div class="pie-chart-container">
+          <div class="pie-chart">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#8b5cf6" stroke-width="20" 
+                      stroke-dasharray="121.5 242" stroke-dashoffset="0" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#06b6d4" stroke-width="20" 
+                      stroke-dasharray="125.7 237.3" stroke-dashoffset="-121.5" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#3b82f6" stroke-width="20" 
+                      stroke-dasharray="78.5 284.5" stroke-dashoffset="-247.2" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#ef4444" stroke-width="20" 
+                      stroke-dasharray="47.1 315.9" stroke-dashoffset="-325.7" transform="rotate(-90 75 75)"/>
+            </svg>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #8b5cf6;"></div>
+              <span>Admin 32.33% (8)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #06b6d4;"></div>
+              <span>ICT 33.33% (8)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #3b82f6;"></div>
+              <span>Finance 20.83% (5)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #ef4444;"></div>
+              <span>Program Management 12.5% (3)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticket by Type -->
+      <div class="chart-card">
+        <h3>Ticket by type</h3>
+        <div class="pie-chart-container">
+          <div class="pie-chart">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#8b5cf6" stroke-width="20" 
+                      stroke-dasharray="172.8 190.2" stroke-dashoffset="0" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#06b6d4" stroke-width="20" 
+                      stroke-dasharray="110 253" stroke-dashoffset="-172.8" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#10b981" stroke-width="20" 
+                      stroke-dasharray="62.8 300.2" stroke-dashoffset="-282.8" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#f59e0b" stroke-width="20" 
+                      stroke-dasharray="15.7 347.3" stroke-dashoffset="-345.6" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#ef4444" stroke-width="20" 
+                      stroke-dasharray="15.7 347.3" stroke-dashoffset="-361.3" transform="rotate(-90 75 75)"/>
+            </svg>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #8b5cf6;"></div>
+              <span>General Inquiry 45.83% (11)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #06b6d4;"></div>
+              <span>Award Progression 29.17% (7)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #10b981;"></div>
+              <span>Certificate Request 16.67% (4)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #f59e0b;"></div>
+              <span>Registration Issue 4.17% (1)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #ef4444;"></div>
+              <span>Complaint or Grievance 4.17% (1)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Ticket Creator -->
+      <div class="chart-card">
+        <h3>Top ticket creator</h3>
+        <div class="pie-chart-container">
+          <div class="pie-chart">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#8b5cf6" stroke-width="20" 
+                      stroke-dasharray="203 160" stroke-dashoffset="0" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#06b6d4" stroke-width="20" 
+                      stroke-dasharray="87 276" stroke-dashoffset="-203" transform="rotate(-90 75 75)"/>
+              <circle cx="75" cy="75" r="60" fill="none" stroke="#10b981" stroke-width="20" 
+                      stroke-dasharray="87 276" stroke-dashoffset="-290" transform="rotate(-90 75 75)"/>
+            </svg>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #8b5cf6;"></div>
+              <span>access xxxxxxxxxxxxxxx 53.85% (7)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #06b6d4;"></div>
+              <span>Ivy Rose Arthur 23.08% (3)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #10b981;"></div>
+              <span>bryson igadwa 23.08% (3)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <!-- Ticket History -->
+      <div class="chart-card ticket-history">
+        <h3>Ticket history</h3>
+        <p class="chart-subtitle">This month: last month 0</p>
+        <div class="bar-chart">
+          <div class="bar-chart-container">
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Jul</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 120px; background-color: #8b5cf6;"></div>
+              <span class="bar-label">Aug</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Sep</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Oct</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Nov</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Dec</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Jan</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Feb</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Mar</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Apr</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">May</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar" style="height: 5px; background-color: #e5e7eb;"></div>
+              <span class="bar-label">Jun</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Response Times and Stats -->
+      <div class="stats-section">
+        <div class="stat-card response-time-card">
+          <h3>First Response Time</h3>
+          <div class="response-time">
+            <span class="time-value">44</span>
+            <span class="time-unit">hours</span>
+          </div>
+        </div>
+
+        <div class="stat-card countdown-card">
+          <h3>Last Response Time</h3>
+          <div class="countdown">
+            <div class="countdown-item">
+              <span class="countdown-value">1</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-value">6</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-value">22</span>
+              <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-value">59</span>
+              <span class="countdown-label">Seconds</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-value">59</span>
+              <span class="countdown-label">Milliseconds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card customers-card">
+          <h3>CUSTOMERS</h3>
+          <div class="customer-count">
+            <span class="count-value">30</span>
+            <div class="count-icon">👥</div>
+          </div>
+        </div>
+
+        <div class="stat-card contacts-card">
+          <h3>CONTACTS</h3>
+          <div class="contact-count">
+            <span class="count-value">1</span>
+            <div class="count-icon">📞</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
