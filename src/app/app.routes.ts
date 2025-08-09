@@ -64,7 +64,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/tickets/tickets.component').then(m => m.TicketsComponent)
+        loadComponent: () => import('./features/tickets/pages/ticket-list/ticket-list.component').then(m => m.TicketListComponent)
       },
       {
         path: 'create',

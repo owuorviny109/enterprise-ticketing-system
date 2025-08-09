@@ -59,10 +59,10 @@
   cursor: pointer;
   position: relative;
   transition: background 0.2s ease;
-}
 
-.language-selector:hover, .profile-section:hover { 
-  background: #f8f9fa; 
+  &:hover { 
+    background: #f8f9fa; 
+  }
 }
 
 .profile-name {
@@ -97,10 +97,10 @@
   align-items: center;
   gap: 8px;
   font-size: 14px;
-}
 
-.dropdown-item:hover { 
-  background: #f8f9fa; 
+  &:hover { 
+    background: #f8f9fa; 
+  }
 }
 
 .theme-btn {
@@ -111,10 +111,10 @@
   padding: 8px;
   border-radius: 6px;
   transition: background 0.2s ease;
-}
 
-.theme-btn:hover { 
-  background: #f8f9fa; 
+  &:hover { 
+    background: #f8f9fa; 
+  }
 }
 
 .flag {
