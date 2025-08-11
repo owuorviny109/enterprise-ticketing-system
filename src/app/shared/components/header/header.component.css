@@ -103,6 +103,17 @@
   background: #f8f9fa; 
 }
 
+.dropdown-item.logout-item {
+  color: #dc3545;
+  border-top: 1px solid #e9ecef;
+  margin-top: 5px;
+}
+
+.dropdown-item.logout-item:hover {
+  background: #f8d7da;
+  color: #721c24;
+}
+
 .theme-btn {
   background: none;
   border: none;

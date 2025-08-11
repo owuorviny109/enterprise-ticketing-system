@@ -5,33 +5,32 @@
       <p>Sign in to your account to continue</p>
     </div>
 
+    <!-- Sample Credentials Info -->
+    <div class="sample-credentials">
+      <h3>Sample Login Credentials</h3>
+      <div class="credentials-list">
+        <div class="credential-item">
+          <strong>Admin:</strong> admin@presidentsaward.ke / admin123
+        </div>
+        <div class="credential-item">
+          <strong>User:</strong> user@presidentsaward.ke / user123
+        </div>
+      </div>
+    </div>
+
     <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form">
       <!-- Email -->
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          [(ngModel)]="email"
-          required
-          placeholder="Enter your email address"
-          [class.error]="!email && loginForm.submitted"
-        />
+        <input type="email" name="email" id="email" [(ngModel)]="email" required placeholder="Enter your email address"
+          [class.error]="!email && loginForm.submitted" />
       </div>
 
       <!-- Password -->
       <div class="form-group">
         <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          [(ngModel)]="password"
-          required
-          placeholder="Enter your password"
-          [class.error]="!password && loginForm.submitted"
-        />
+        <input type="password" name="password" id="password" [(ngModel)]="password" required
+          placeholder="Enter your password" [class.error]="!password && loginForm.submitted" />
       </div>
 
       <!-- Remember Me -->
@@ -49,12 +48,7 @@
 
       <!-- Submit Button -->
       <div class="form-actions">
-        <button
-          type="submit"
-          class="submit-btn"
-          [disabled]="loading"
-          [class.loading]="loading"
-        >
+        <button type="submit" class="submit-btn" [disabled]="loading" [class.loading]="loading">
           <span *ngIf="!loading">Sign In</span>
           <span *ngIf="loading" class="loading-text">
             <svg class="spinner" width="20" height="20" viewBox="0 0 24 24">
