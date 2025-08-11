@@ -1,0 +1,76 @@
+<div class="create-note-container">
+    <div class="header">
+      <h1>Create a new note</h1>
+      <nav class="breadcrumb">
+        <span class="breadcrumb-item">🏠</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item">Notes</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item active">Create a new note</span>
+      </nav>
+    </div>
+  
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Note Details</h2>
+        <p>Fill in the details below to create a new note</p>
+      </div>
+  
+      <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="note-form" *ngIf="noteForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" formControlName="title" class="form-control" placeholder="Enter title" />
+            <div class="error-message" *ngIf="isFieldInvalid('title')">{{ getFieldError('title') }}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="relatedTo">Related To</label>
+            <select id="relatedTo" formControlName="relatedTo" class="form-control">
+              <option value="Contact">Contact</option>
+              <option value="Organization">Organization</option>
+              <option value="Ticket">Ticket</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="referenceId">Reference ID</label>
+            <input id="referenceId" formControlName="referenceId" class="form-control" placeholder="Enter reference ID" />
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content" formControlName="content" class="form-control" placeholder="Enter note content"></textarea>
+            <div class="error-message" *ngIf="isFieldInvalid('content')">{{ getFieldError('content') }}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="visibility">Visibility</label>
+            <select id="visibility" formControlName="visibility" class="form-control">
+              <option value="Private">Private</option>
+              <option value="Public">Public</option>
+              <option value="Team Only">Team Only</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" formControlName="priority" class="form-control">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="form-actions">
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+            <span *ngIf="!isSubmitting">Create Note</span>
+            <span *ngIf="isSubmitting" class="loading-text">Creating...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

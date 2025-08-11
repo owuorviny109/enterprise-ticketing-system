@@ -139,6 +139,10 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./features/organizations/organizations.component').then(m => m.OrganizationsComponent)
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./features/organizations/create-organization.component').then(m => m.CreateOrganizationComponent)
       }
     ]
   },
@@ -151,6 +155,10 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./features/notes/notes.component').then(m => m.NotesComponent)
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./features/notes/create-note.component').then(m => m.CreateNoteComponent)
       }
     ]
   },
