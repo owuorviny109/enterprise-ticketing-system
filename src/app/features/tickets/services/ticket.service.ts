@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { map, tap, delay } from 'rxjs/operators';
+import { map, tap, delay, catchError } from 'rxjs/operators';
 import { Ticket, CreateTicketRequest, TicketListResponse } from '../../../models/ticket.model';
 
 // Export types for use in other components
@@ -45,12 +45,28 @@ export class TicketService {
     
     const params = this.buildQueryParams(filter);
     
+    // DATABASE READY: Replace this with actual HTTP call
     return this.http.get<TicketListResponse>(`${this.baseUrl}`, { params })
       .pipe(
         tap(response => {
           this.ticketsSubject.next(response.tickets);
           this.totalCount.set(response.total);
           this.loadingSubject.next(false);
+        }),
+        // FALLBACK: If no backend, use mock data
+        catchError(() => {
+          const currentTickets = this.ticketsSubject.value;
+          const mockResponse: TicketListResponse = {
+            tickets: currentTickets,
+            total: currentTickets.length,
+            page: filter.page || 1,
+            limit: filter.limit || 20
+          };
+          
+          this.totalCount.set(currentTickets.length);
+          this.loadingSubject.next(false);
+          
+          return of(mockResponse);
         })
       );
   }
@@ -71,33 +87,43 @@ export class TicketService {
   createTicket(ticketData: CreateTicketRequest): Observable<Ticket> {
     this.loadingSubject.next(true);
     
-    // For now, simulate API call with mock data
-    // Later replace with actual HTTP call
-    const mockTicket: Ticket = {
-      id: this.generateId(),
-      key: this.generateTicketKey(),
-      subject: ticketData.subject,
-      description: ticketData.requestDetails,
-      type: ticketData.ticketType,
-      priority: ticketData.priority || 'normal',
-      status: 'pending',
-      department: ticketData.department,
-      customerId: ticketData.email || 'anonymous',
-      assignedTo: ticketData.assignedTo,
-      attachments: [],
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-
-    // Simulate API delay
-    return of(mockTicket).pipe(
-      delay(1500),
+    // READY FOR DATABASE: Replace this with actual HTTP call
+    return this.http.post<Ticket>(`${this.baseUrl}`, ticketData).pipe(
       tap(newTicket => {
         // Add to current tickets list
         const currentTickets = this.ticketsSubject.value;
         this.ticketsSubject.next([newTicket, ...currentTickets]);
         this.totalCount.update(count => count + 1);
         this.loadingSubject.next(false);
+      }),
+      // FALLBACK: If no backend, use mock data
+      // Remove this catchError when database is connected
+      catchError(() => {
+        const mockTicket: Ticket = {
+          id: this.generateId(),
+          key: this.generateTicketKey(),
+          subject: ticketData.subject,
+          description: ticketData.requestDetails,
+          type: ticketData.ticketType,
+          priority: ticketData.priority || 'normal',
+          status: 'pending',
+          department: ticketData.department,
+          customerId: ticketData.email || 'anonymous',
+          assignedTo: ticketData.assignedTo,
+          attachments: [],
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+
+        return of(mockTicket).pipe(
+          delay(1500),
+          tap(newTicket => {
+            const currentTickets = this.ticketsSubject.value;
+            this.ticketsSubject.next([newTicket, ...currentTickets]);
+            this.totalCount.update(count => count + 1);
+            this.loadingSubject.next(false);
+          })
+        );
       })
     );
   }

@@ -33,7 +33,7 @@ export class CreateOrganizationComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
