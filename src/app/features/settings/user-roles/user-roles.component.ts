@@ -14,7 +14,7 @@ import { RoleService, Role } from '../services/role.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './user-roles.component.html',
-  styleUrls: ['./user-roles.component.css']
+  styleUrls: ['./user-roles.component.scss']
 })
 <<<<<<< HEAD
 export class UserRolesComponent {

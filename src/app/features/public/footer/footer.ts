@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
 >>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   templateUrl: './footer.html',
-  styleUrl: './footer.css'
+  styleUrl: './footer.component.scss'
 })
 export class Footer {
 

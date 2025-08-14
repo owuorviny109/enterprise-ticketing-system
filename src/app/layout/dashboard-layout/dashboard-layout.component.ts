@@ -9,6 +9,6 @@ import { HeaderComponent } from '../../shared/components/header/header.component
   standalone: true,
   imports: [CommonModule, RouterOutlet, SidebarComponent, HeaderComponent],
   templateUrl: './dashboard-layout.component.html',
-  styleUrls: ['./dashboard-layout.component.css']
+  styleUrls: ['./dashboard-layout.component.scss']
 })
 export class DashboardLayoutComponent {}

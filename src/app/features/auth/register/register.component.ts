@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -16,8 +17,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -43,29 +45,35 @@ export class RegisterComponent implements OnInit {
   private passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const password = control.get('password');
     const confirmPassword = control.get('confirmPassword');
-    
+
     if (!password || !confirmPassword) {
       return null;
     }
-    
+
     return password.value === confirmPassword.value ? null : { passwordMismatch: true };
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.isSubmitting = true;
-      
+
       const formData = this.registerForm.value;
       delete formData.confirmPassword; // Remove confirm password from submission
-      
-      // Simulate API call
-      setTimeout(() => {
-        console.log('Registration data:', formData);
-        this.isSubmitting = false;
-        
-        // Navigate to login or dashboard
-        this.router.navigate(['/auth/login']);
-      }, 2000);
+      delete formData.agreeToTerms; // Remove terms checkbox from submission
+
+      // Call the backend API
+      this.http.post<any>('http://localhost:3000/api/register', formData).subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          alert(`${response.message} You can now login with your credentials.`);
+          this.router.navigate(['/auth/login']);
+        },
+        error: (err) => {
+          this.isSubmitting = false;
+          const errorMessage = err.error?.error || 'Registration failed. Please try again.';
+          alert(`Registration failed: ${errorMessage}`);
+        }
+      });
     } else {
       this.markFormGroupTouched();
     }
@@ -117,12 +125,12 @@ export class RegisterComponent implements OnInit {
   isFieldInvalid(fieldName: string): boolean {
     const control = this.registerForm.get(fieldName);
     const isInvalid = !!(control?.invalid && control.touched);
-    
+
     // Special case for confirm password
     if (fieldName === 'confirmPassword') {
       return isInvalid || (this.registerForm.errors?.['passwordMismatch'] && control?.touched);
     }
-    
+
     return isInvalid;
   }
 }
