@@ -4,13 +4,13 @@
 
 .page-header {
   margin-bottom: 30px;
-}
 
-.page-header h1 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #495057;
-  margin: 0 0 5px 0;
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #495057;
+    margin: 0 0 5px 0;
+  }
 }
 
 .breadcrumb {
@@ -48,11 +48,11 @@
   border-radius: 4px;
   font-size: 14px;
   width: 250px;
-}
 
-.search-input:focus {
-  outline: none;
-  border-color: #6f42c1;
+  &:focus {
+    outline: none;
+    border-color: #6f42c1;
+  }
 }
 
 .reset-btn {
@@ -63,10 +63,10 @@
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
-}
 
-.reset-btn:hover {
-  background: #5a6268;
+  &:hover {
+    background: #5a6268;
+  }
 }
 
 .new-role-btn {
@@ -77,10 +77,10 @@
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
-}
 
-.new-role-btn:hover {
-  background: #5a32a3;
+  &:hover {
+    background: #5a32a3;
+  }
 }
 
 .table-container {
@@ -90,39 +90,39 @@
 .roles-table {
   width: 100%;
   border-collapse: collapse;
-}
 
-.roles-table th {
-  background: #f8f9fa;
-  padding: 15px;
-  text-align: left;
-  font-weight: 600;
-  color: #495057;
-  border-bottom: 1px solid #e9ecef;
-  font-size: 14px;
-}
+  th {
+    background: #f8f9fa;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 14px;
 
-.roles-table th:first-child {
-  width: 80px;
-}
+    &:first-child {
+      width: 80px;
+    }
 
-.roles-table th:last-child {
-  width: 60px;
-  text-align: center;
+    &:last-child {
+      width: 60px;
+      text-align: center;
+    }
+  }
+
+  td {
+    padding: 15px;
+    vertical-align: middle;
+  }
 }
 
 .role-row {
   border-bottom: 1px solid #e9ecef;
   transition: background-color 0.2s ease;
-}
 
-.role-row:hover {
-  background: #f8f9fa;
-}
-
-.roles-table td {
-  padding: 15px;
-  vertical-align: middle;
+  &:hover {
+    background: #f8f9fa;
+  }
 }
 
 .role-id {
@@ -155,11 +155,11 @@
   padding: 5px;
   border-radius: 4px;
   transition: all 0.2s ease;
-}
 
-.edit-btn:hover {
-  background: #f8f9fa;
-  color: #6f42c1;
+  &:hover {
+    background: #f8f9fa;
+    color: #6f42c1;
+  }
 }
 
 .loading-state {

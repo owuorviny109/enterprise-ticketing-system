@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-ticket-form',
   imports: [],
   templateUrl: './ticket-form.html',
-  styleUrls: ['./ticket-form.css']
+  styleUrls: ['./ticket-form.component.scss']
 })
 export class TicketFormComponent {
 

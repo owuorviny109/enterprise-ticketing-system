@@ -4,13 +4,13 @@
 
 .page-header { 
   margin-bottom: 30px; 
-}
 
-.page-header h1 { 
-  font-size: 24px; 
-  font-weight: 600; 
-  color: #495057; 
-  margin: 0 0 5px 0; 
+  h1 { 
+    font-size: 24px; 
+    font-weight: 600; 
+    color: #495057; 
+    margin: 0 0 5px 0; 
+  }
 }
 
 .breadcrumb { 
@@ -119,30 +119,30 @@
 .tickets-table { 
   width: 100%; 
   border-collapse: collapse; 
-}
 
-.tickets-table th { 
-  background: #f8f9fa; 
-  padding: 15px; 
-  text-align: left; 
-  font-weight: 600; 
-  color: #495057; 
-  border-bottom: 1px solid #e9ecef; 
-  font-size: 14px; 
+  th { 
+    background: #f8f9fa; 
+    padding: 15px; 
+    text-align: left; 
+    font-weight: 600; 
+    color: #495057; 
+    border-bottom: 1px solid #e9ecef; 
+    font-size: 14px; 
+  }
+
+  td { 
+    padding: 15px; 
+    vertical-align: top; 
+  }
 }
 
 .ticket-row { 
   border-bottom: 1px solid #e9ecef; 
   transition: background-color 0.2s ease; 
-}
 
-.ticket-row:hover { 
-  background: #f8f9fa; 
-}
-
-.tickets-table td { 
-  padding: 15px; 
-  vertical-align: top; 
+  &:hover { 
+    background: #f8f9fa; 
+  }
 }
 
 .ticket-key { 
@@ -214,8 +214,10 @@
   font-size: 14px; 
 }
 
-.page-btn.active { 
-  background: #6f42c1; 
-  color: white; 
-  border-color: #6f42c1; 
+.page-btn {
+  &.active { 
+    background: #6f42c1; 
+    color: white; 
+    border-color: #6f42c1; 
+  }
 }
