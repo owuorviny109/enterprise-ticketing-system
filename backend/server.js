@@ -193,8 +193,10 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/register', async (req, res) => {
   try {
     const { firstName, lastName, email, password, phone, city, country, organization } = req.body;
+    console.log('🔍 Registration attempt:', { firstName, lastName, email, phone, city, country });
 
     if (!firstName || !lastName || !email || !password) {
+      console.log('❌ Missing required fields');
       return res.status(400).json({ error: 'Required fields missing' });
     }
 
