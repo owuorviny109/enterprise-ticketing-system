@@ -1,11 +1,41 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+=======
+<<<<<<< HEAD
+import { RouterModule } from '@angular/router';
+=======
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
+>>>>>>> Gerson
 import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-home',
+<<<<<<< HEAD
+  standalone: true,
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, Footer],
+=======
+<<<<<<< HEAD
+  imports: [RouterModule, Footer],
+>>>>>>> Gerson
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss'
+})
+export class HomeComponent {
+  ticketForm: FormGroup;
+  isSubmitting = false;
+  showSuccess = false;
+  successMessage = '';
+  fileUploadMessages: string[] = [];
+
+<<<<<<< HEAD
+=======
+=======
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule, Footer],
   templateUrl: './home.component.html',
@@ -18,6 +48,7 @@ export class HomeComponent {
   successMessage = '';
   fileUploadMessages: string[] = [];
 
+>>>>>>> Gerson
   ticketTypes = [
     'General Inquiry',
     'Award Progression',
@@ -167,4 +198,8 @@ export class HomeComponent {
       });
     }
   }
+<<<<<<< HEAD
+=======
+>>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
+>>>>>>> Gerson
 }
