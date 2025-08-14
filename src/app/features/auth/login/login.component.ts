@@ -17,12 +17,6 @@ export class LoginComponent {
   error: string = '';
   loading: boolean = false;
 
-  // Sample credentials for testing
-  private sampleCredentials = [
-    { email: 'admin@presidentsaward.ke', password: 'admin123', role: 'admin' },
-    { email: 'user@presidentsaward.ke', password: 'user123', role: 'user' }
-  ];
-
   constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(): void {
@@ -35,41 +29,22 @@ export class LoginComponent {
 
     this.loading = true;
 
-    // Check against sample credentials first (for demo purposes)
-    const validCredential = this.sampleCredentials.find(
-      cred => cred.email === this.email && cred.password === this.password
-    );
-
-    if (validCredential) {
-      // Simulate API delay
-      setTimeout(() => {
-        this.loading = false;
-        localStorage.setItem('user', JSON.stringify({
-          email: validCredential.email,
-          role: validCredential.role
-        }));
-        alert(`Login successful! Welcome ${validCredential.role}!`);
-        this.router.navigate(['/dashboard']);
-      }, 1500);
-      return;
-    }
-
-    // If no sample credentials match, try API call
     const payload = {
       email: this.email,
       password: this.password
     };
 
-    this.http.post<any>('http://localhost:4200/api/login', payload).subscribe({
+    this.http.post<any>('http://localhost:3000/api/login', payload).subscribe({
       next: (response) => {
         this.loading = false;
         localStorage.setItem('user', JSON.stringify(response.user));
-        alert('Login successful!');
+        localStorage.setItem('token', response.token);
+        alert(`${response.message} Welcome ${response.user.role}!`);
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.loading = false;
-        this.error = 'Login failed. Please check your credentials or try the sample accounts.';
+        this.error = 'Login failed. Please check your credentials.';
       }
     });
   }
