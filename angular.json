@@ -64,7 +64,8 @@
               "buildTarget": "enterprise-ticketing-system-temp:build:production"
             },
             "development": {
-              "buildTarget": "enterprise-ticketing-system-temp:build:development"
+              "buildTarget": "enterprise-ticketing-system-temp:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -4,8 +4,8 @@ export interface Ticket {
   subject: string;
   description: string;
   type: string;
-  priority: 'low' | 'normal' | 'high' | 'urgent';
-  status: 'pending' | 'open' | 'in_progress' | 'resolved' | 'closed';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  status: 'new' | 'open' | 'in_progress' | 'resolved' | 'closed';
   department: string;
   customerId?: string;
   assignedTo?: string;
@@ -26,7 +26,7 @@ export interface CreateTicketRequest {
   ticketType: string;
   department: string;
   requestDetails: string;
-  priority?: 'low' | 'normal' | 'high' | 'urgent';
+  priority?: 'low' | 'medium' | 'high' | 'urgent';
   assignedTo?: string;
   attachments?: File[];
   agreeToTerms?: boolean;

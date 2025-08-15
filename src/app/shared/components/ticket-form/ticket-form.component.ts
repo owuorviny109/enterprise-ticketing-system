@@ -68,7 +68,7 @@ export class TicketFormComponent implements OnInit {
 
   priorities = [
     { value: 'low', label: 'Low' },
-    { value: 'normal', label: 'Normal' },
+    { value: 'medium', label: 'Medium' },
     { value: 'high', label: 'High' },
     { value: 'urgent', label: 'Urgent' }
   ];
@@ -106,7 +106,7 @@ export class TicketFormComponent implements OnInit {
 
     // Add admin-specific fields
     if (this.config.showPriority) {
-      formConfig.priority = [this.initialData.priority || 'normal'];
+      formConfig.priority = [this.initialData.priority || 'medium'];
     }
 
     if (this.config.showAssignment) {

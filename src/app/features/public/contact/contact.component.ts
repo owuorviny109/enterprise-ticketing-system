@@ -13,13 +13,7 @@ import { CreateTicketRequest } from '../../../models/ticket.model';
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, TicketFormComponent],
-  template: `
-    <app-ticket-form 
-      [config]="formConfig"
-      [initialData]="initialData"
-      (formSubmit)="onTicketSubmit($event)">
-    </app-ticket-form>
-  `,
+  templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
@@ -53,7 +47,7 @@ export class ContactComponent {
       ticketType: formData.ticketType,
       department: formData.department,
       requestDetails: formData.requestDetails,
-      priority: 'normal', // Default priority for public tickets
+      priority: 'medium', // Default priority for public tickets
       email: formData.email,
       firstName: formData.firstName,
       lastName: formData.lastName,

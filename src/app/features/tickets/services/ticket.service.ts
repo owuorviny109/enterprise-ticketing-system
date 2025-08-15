@@ -45,7 +45,6 @@ export class TicketService {
     
     const params = this.buildQueryParams(filter);
     
-    // DATABASE READY: Replace this with actual HTTP call
     return this.http.get<TicketListResponse>(`${this.baseUrl}`, { params })
       .pipe(
         tap(response => {
@@ -53,20 +52,10 @@ export class TicketService {
           this.totalCount.set(response.total);
           this.loadingSubject.next(false);
         }),
-        // FALLBACK: If no backend, use mock data
-        catchError(() => {
-          const currentTickets = this.ticketsSubject.value;
-          const mockResponse: TicketListResponse = {
-            tickets: currentTickets,
-            total: currentTickets.length,
-            page: filter.page || 1,
-            limit: filter.limit || 20
-          };
-          
-          this.totalCount.set(currentTickets.length);
+        catchError(error => {
           this.loadingSubject.next(false);
-          
-          return of(mockResponse);
+          console.error('Error fetching tickets:', error);
+          throw error;
         })
       );
   }
@@ -87,7 +76,6 @@ export class TicketService {
   createTicket(ticketData: CreateTicketRequest): Observable<Ticket> {
     this.loadingSubject.next(true);
     
-    // READY FOR DATABASE: Replace this with actual HTTP call
     return this.http.post<Ticket>(`${this.baseUrl}`, ticketData).pipe(
       tap(newTicket => {
         // Add to current tickets list
@@ -96,34 +84,10 @@ export class TicketService {
         this.totalCount.update(count => count + 1);
         this.loadingSubject.next(false);
       }),
-      // FALLBACK: If no backend, use mock data
-      // Remove this catchError when database is connected
-      catchError(() => {
-        const mockTicket: Ticket = {
-          id: this.generateId(),
-          key: this.generateTicketKey(),
-          subject: ticketData.subject,
-          description: ticketData.requestDetails,
-          type: ticketData.ticketType,
-          priority: ticketData.priority || 'normal',
-          status: 'pending',
-          department: ticketData.department,
-          customerId: ticketData.email || 'anonymous',
-          assignedTo: ticketData.assignedTo,
-          attachments: [],
-          createdAt: new Date(),
-          updatedAt: new Date()
-        };
-
-        return of(mockTicket).pipe(
-          delay(1500),
-          tap(newTicket => {
-            const currentTickets = this.ticketsSubject.value;
-            this.ticketsSubject.next([newTicket, ...currentTickets]);
-            this.totalCount.update(count => count + 1);
-            this.loadingSubject.next(false);
-          })
-        );
+      catchError(error => {
+        this.loadingSubject.next(false);
+        console.error('Error creating ticket:', error);
+        throw error;
       })
     );
   }
@@ -277,6 +241,19 @@ export class TicketService {
     resolved: number;
     closed: number;
   }> {
-    return this.http.get<any>(`${this.baseUrl}/stats`);
+    return this.http.get<any>(`${this.baseUrl}/stats`).pipe(
+      catchError(error => {
+        console.error('Error fetching ticket stats:', error);
+        // Return default stats on error
+        return of({
+          total: 0,
+          pending: 0,
+          open: 0,
+          inProgress: 0,
+          resolved: 0,
+          closed: 0
+        });
+      })
+    );
   }
 }
