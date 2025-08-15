@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export interface Contact {
     firstName: string;
     lastName: string;
@@ -15,6 +14,3 @@ export interface Contact {
     preferredContactMethod?: 'Email' | 'Phone' | 'SMS';
   }
   
-=======
- 
->>>>>>> Gerson

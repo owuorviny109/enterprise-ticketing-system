@@ -1,57 +1,12 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-=======
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
->>>>>>> Gerson
 
 @Component({
   selector: 'app-register',
   standalone: true,
-<<<<<<< HEAD
-  imports: [CommonModule, FormsModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
-})
-export class RegisterComponent {
-  firstName = '';
-  lastName = '';
-  email = '';
-  phone = '';
-  country = '';
-  city = '';
-  address = '';
-  password = '';
-  confirmPassword = '';
-  error = '';
-
-  onRegister() {
-    if (this.password !== this.confirmPassword) {
-      this.error = 'Passwords do not match.';
-      return;
-    }
-
-    const payload = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      phone: this.phone,
-      country: this.country,
-      city: this.city,
-      address: this.address,
-      password: this.password,
-    };
-
-    console.log('Sending payload:', payload);
-    // TODO: hook into backend service/API
-  }
-}
-=======
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
@@ -179,4 +134,3 @@ export class RegisterComponent implements OnInit {
     return isInvalid;
   }
 }
->>>>>>> Gerson

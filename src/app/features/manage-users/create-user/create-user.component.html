@@ -11,13 +11,10 @@
   </div>
 
   <div class="form-container">
-<<<<<<< HEAD
-=======
     <div class="form-header">
       <h2>User Information</h2>
       <p>Fill in the details below to create a new user account</p>
     </div>
->>>>>>> Gerson
 
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form" *ngIf="userForm">
       <!-- First Row: First name, Last name, Email -->
@@ -157,11 +154,7 @@
 
         <div class="form-group">
           <label for="photo">Photo</label>
-<<<<<<< HEAD
-          <div class="photo-upload">
-=======
           <div class="file-upload-area">
->>>>>>> Gerson
             <input
               type="file"
               id="photo"
@@ -169,12 +162,6 @@
               (change)="onPhotoSelected($event)"
               class="file-input"
             />
-<<<<<<< HEAD
-            <button type="button" class="browse-btn" onclick="document.getElementById('photo')?.click()">
-              Browse
-            </button>
-            <span class="file-name" *ngIf="selectedPhoto">{{ selectedPhoto.name }}</span>
-=======
             <label for="photo" class="file-upload-label">
               <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -183,7 +170,6 @@
               </svg>
               <span>{{ selectedPhoto ? selectedPhoto.name : 'Choose photo' }}</span>
             </label>
->>>>>>> Gerson
           </div>
         </div>
 
@@ -194,13 +180,6 @@
       <div class="form-actions">
         <button
           type="submit"
-<<<<<<< HEAD
-          class="create-btn"
-          [disabled]="isSubmitting"
-        >
-          <span *ngIf="isSubmitting">Creating...</span>
-          <span *ngIf="!isSubmitting">Create User</span>
-=======
           class="submit-btn"
           [disabled]="isSubmitting"
           [class.loading]="isSubmitting"
@@ -218,7 +197,6 @@
             </svg>
             Creating...
           </span>
->>>>>>> Gerson
         </button>
       </div>
     </form>

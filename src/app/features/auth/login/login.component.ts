@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-<<<<<<< HEAD
-import { FormsModule } from '@angular/forms'; // Use FormsModule instead of ReactiveFormsModule
-=======
 import { FormsModule } from '@angular/forms';
->>>>>>> Gerson
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -38,18 +34,12 @@ export class LoginComponent {
       password: this.password
     };
 
-<<<<<<< HEAD
-    this.http.post<any>('http://localhost:4200/api/login', payload).subscribe({
-      next: (response) => {
-        alert('Login successful!');
-=======
     this.http.post<any>('http://localhost:3000/api/login', payload).subscribe({
       next: (response) => {
         this.loading = false;
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
         alert(`${response.message} Welcome ${response.user.role}!`);
->>>>>>> Gerson
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {

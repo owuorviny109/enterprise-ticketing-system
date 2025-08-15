@@ -8,12 +8,7 @@
 
 // Header Styles
 .header {
-<<<<<<< HEAD
-  background: #3b82f6;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-=======
   background: linear-gradient(135deg, #3b5bdb);
->>>>>>> Gerson
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -24,66 +19,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-<<<<<<< HEAD
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.logo {
-  height: 40px;
-  width: auto;
-}
-
-.brand-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-
-  &:hover,
-  &.active {
-    color: white;
-    background: rgba(255, 255, 255, 0.2);
-  }
-}
-
-.btn-login {
-  background: white;
-  color: #3b82f6;
-  border: 2px solid white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-1px);
-=======
   padding: 18px 48px;
   background: transparent;
 
@@ -131,7 +66,6 @@
     &:hover {
       background: #3b5bdb;
     }
->>>>>>> Gerson
   }
 }
 
@@ -282,24 +216,6 @@
 }
 
 // Responsive Design
-<<<<<<< HEAD
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .nav-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav-links a {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.95rem;
-=======
 @media (max-width: 900px) {
   .navbar {
     flex-direction: column;
@@ -313,7 +229,6 @@
         font-size: 0.95rem;
       }
     }
->>>>>>> Gerson
   }
 
   .footer-content {
@@ -327,34 +242,6 @@
   }
 }
 
-<<<<<<< HEAD
-@media (max-width: 480px) {
-  .navbar {
-    padding: 0.75rem;
-  }
-
-  .brand-text {
-    font-size: 1rem;
-    color: white;
-  }
-
-  .nav-links {
-    gap: 0.75rem;
-  }
-
-  .nav-links a {
-    font-size: 0.9rem;
-    color: white;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .btn-login {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    background: white;
-    color: #3b82f6;
-    border: 2px solid white;
-=======
 @media (max-width: 600px) {
   .navbar {
     padding: 12px;
@@ -374,6 +261,5 @@
       padding: 6px 20px;
       font-size: 0.9rem;
     }
->>>>>>> Gerson
   }
 }

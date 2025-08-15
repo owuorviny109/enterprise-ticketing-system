@@ -1,23 +1,4 @@
 import { Routes } from '@angular/router';
-<<<<<<< HEAD
-    
-export const routes: Routes = [
-  // Public routes
-  {
-    path: '',
-    loadComponent: () =>
-      import('./layout/public-layout/public-layout.component').then(m => m.PublicLayoutComponent),
-    children: [
-      { path: '', loadComponent: () => import('./features/public/home/home.component').then(m => m.HomeComponent) },
-      { path: 'home', loadComponent: () => import('./features/public/home/home.component').then(m => m.HomeComponent) },
-      { path: 'contact', loadComponent: () => import('./features/public/contact/contact.component').then(m => m.ContactComponent) },
-      { path: 'faqs', loadComponent: () => import('./features/public/faqs/faqs.component').then(m => m.FaqsComponent) },
-      { path: 'submit-ticket', loadComponent: () => import('./features/public/ticket-form/ticket-form.component').then(m => m.TicketFormComponent) }
-    ]
-  },
-
-  // Admin routes with dashboard layout
-=======
 
 export const routes: Routes = [
   // Public routes (no authentication required) - using public layout
@@ -65,7 +46,6 @@ export const routes: Routes = [
   },
 
   // Protected routes with dashboard layout (Gerson's approach)
->>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   {
     path: 'dashboard',
     loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
@@ -73,11 +53,8 @@ export const routes: Routes = [
       { path: '', loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent) }
     ]
   },
-<<<<<<< HEAD
-=======
 
   // Ticket management routes with dashboard layout
->>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
   {
     path: 'tickets',
     loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
@@ -85,15 +62,6 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./features/tickets/tickets.component').then(m => m.TicketsComponent)
-<<<<<<< HEAD
-      }
-    ]
-  },
-
-  // Manage Users
-  {
-    path: 'settings/user-roles',
-=======
       },
       {
         path: 'create',
@@ -109,18 +77,10 @@ export const routes: Routes = [
   // Settings routes with dashboard layout
   {
     path: 'settings',
->>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
     loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
     children: [
       {
         path: '',
-<<<<<<< HEAD
-        loadComponent: () => import('./features/settings/user-roles/user-roles.component').then(m => m.UserRolesComponent)
-      }
-    ]
-  }
-];
-=======
         loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent)
       },
       {
@@ -203,4 +163,3 @@ export const routes: Routes = [
   // Wildcard route - must be last
   { path: '**', redirectTo: '404' }
 ];
->>>>>>> c94db1d03ee9a10abd1b90f9c2d7638d627eab39
