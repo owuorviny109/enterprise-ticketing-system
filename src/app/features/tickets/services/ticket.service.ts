@@ -23,7 +23,7 @@ export interface TicketFilter {
 })
 export class TicketService {
   private http = inject(HttpClient);
-  private readonly baseUrl = '/api/tickets';
+  private readonly baseUrl = 'http://localhost:3000/api/tickets';
   
   // Reactive state management with signals
   private ticketsSubject = new BehaviorSubject<Ticket[]>([]);

@@ -84,11 +84,13 @@ export class CreateTicketComponent {
       // Convert form data to the expected format
       const ticketData: CreateTicketRequest = {
         subject: formData.subject,
-        ticketType: formData.ticketType,
+        type: formData.ticketType,
         department: formData.department,
-        requestDetails: formData.requestDetails,
-        priority: formData.priority || 'normal',
-        assignedTo: formData.assignedTo,
+        description: formData.requestDetails,
+        priority: formData.priority || 'medium',
+        firstName: formData.firstName || 'Admin',
+        lastName: formData.lastName || 'User',
+        email: formData.email || 'admin@presidentsaward.ke',
         attachments: formData.attachments
       };
 

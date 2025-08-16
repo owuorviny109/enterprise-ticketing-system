@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRole } from '../../../config/roles.enum';
-import { CreateUserRequest } from '../../../models/user.model';
-import { UserService } from '../services/user.service';
+import { UserService, CreateUserRequest } from '../services/user.service';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
@@ -16,7 +14,11 @@ import { ToastService } from '../../../shared/services/toast.service';
 })
 export class CreateUserComponent implements OnInit {
   userForm!: FormGroup;
-  userRoles = Object.values(UserRole);
+  userRoles = [
+    { value: 'admin', label: 'Admin' },
+    { value: 'staff', label: 'Staff' },
+    { value: 'user', label: 'User' }
+  ];
   selectedPhoto: File | null = null;
   isSubmitting = false;
 
@@ -56,17 +58,24 @@ export class CreateUserComponent implements OnInit {
     if (this.userForm.valid) {
       this.isSubmitting = true;
       
-      const formData = this.userForm.value as CreateUserRequest;
-      if (this.selectedPhoto) {
-        formData.photo = this.selectedPhoto;
-      }
+      const formData = this.userForm.value;
+      const userData: CreateUserRequest = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phone,
+        city: formData.city,
+        address: formData.address,
+        country: formData.country,
+        role: formData.role
+      };
 
-      this.userService.createUser(formData).subscribe({
-        next: (user) => {
-          console.log('User created successfully:', user);
+      this.userService.createUser(userData).subscribe({
+        next: (response) => {
+          console.log('User created successfully:', response);
           this.isSubmitting = false;
-          this.toastService.showSuccess('Success', `User ${user.firstName} ${user.lastName} created successfully`);
-          // Navigate back to users list
+          this.toastService.showSuccess('Success', 'User created successfully');
           this.router.navigate(['/manage-users']);
         },
         error: (error) => {

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketService } from '../tickets/services/ticket.service';
-import { Ticket } from '../../../models/ticket.model';
+import { Ticket } from '../tickets/services/ticket.service';
 
 interface DashboardMetric {
   title: string;

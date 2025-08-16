@@ -1,42 +1,33 @@
 export interface Ticket {
   id: string;
-  key: string; // Auto-generated ticket key like #838819
+  key: string; // e.g., "#838819"
   subject: string;
   description: string;
-  type: string;
+  type: 'General Inquiry' | 'Award Progression' | 'Certificate Request' | 'Registration Issue' | 'Complaint or Grievance' | 'Technical Support';
+  department: 'Admin' | 'ICT' | 'Finance' | 'Program Management' | 'Customer Service';
   priority: 'low' | 'medium' | 'high' | 'urgent';
   status: 'new' | 'open' | 'in_progress' | 'resolved' | 'closed';
-  department: string;
   customerId?: string;
+  customerName?: string;
+  customerEmail?: string;
   assignedTo?: string;
-  attachments?: File[];
+  assignedToName?: string;
   createdAt: Date;
   updatedAt: Date;
   resolvedAt?: Date;
+  attachments?: string[];
 }
 
 export interface CreateTicketRequest {
-  // Personal info (public mode only)
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  
-  // Ticket details
+  firstName: string;
+  lastName: string;
+  email: string;
   subject: string;
-  ticketType: string;
-  department: string;
-  requestDetails: string;
+  description: string;
+  type: Ticket['type'];
+  department: Ticket['department'];
   priority?: 'low' | 'medium' | 'high' | 'urgent';
-  assignedTo?: string;
   attachments?: File[];
-  agreeToTerms?: boolean;
-}
-
-export interface TicketCreateResponse {
-  success: boolean;
-  ticket?: Ticket;
-  message?: string;
-  error?: string;
 }
 
 export interface TicketListResponse {
