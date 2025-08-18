@@ -24,7 +24,7 @@ export const routes: Routes = [
       },
       {
         path: 'submit-ticket',
-        loadComponent: () => import('./features/public/ticket-form/ticket-form.component').then(m => m.TicketFormComponent)
+        loadComponent: () => import('./features/public/contact/contact.component').then(m => m.ContactComponent)
       },
     ]
   },
@@ -45,6 +45,16 @@ export const routes: Routes = [
     ]
   },
 
+  // Direct auth routes for easier access
+  {
+    path: 'login',
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./features/auth/register/register.component').then(m => m.RegisterComponent)
+  },
+
   // Protected routes with dashboard layout (Gerson's approach)
   {
     path: 'dashboard',
@@ -61,7 +71,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/tickets/tickets.component').then(m => m.TicketsComponent)
+        loadComponent: () => import('./features/tickets/pages/ticket-list/ticket-list.component').then(m => m.TicketListComponent)
       },
       {
         path: 'create',
@@ -126,6 +136,10 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./features/organizations/organizations.component').then(m => m.OrganizationsComponent)
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./features/organizations/create-organization.component').then(m => m.CreateOrganizationComponent)
       }
     ]
   },
@@ -138,6 +152,10 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () => import('./features/notes/notes.component').then(m => m.NotesComponent)
+      },
+      {
+        path: 'create',
+        loadComponent: () => import('./features/notes/create-note.component').then(m => m.CreateNoteComponent)
       }
     ]
   },

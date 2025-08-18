@@ -34,12 +34,9 @@ export class LoginComponent {
       password: this.password
     };
 
-    this.http.post<any>('http://localhost:3000/api/login', payload).subscribe({
+    this.http.post<any>('http://localhost:4200/api/login', payload).subscribe({
       next: (response) => {
-        this.loading = false;
-        localStorage.setItem('user', JSON.stringify(response.user));
-        localStorage.setItem('token', response.token);
-        alert(`${response.message} Welcome ${response.user.role}!`);
+        alert('Login successful!');
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {

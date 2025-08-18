@@ -1,58 +1,19 @@
-:host {
-  display: block;
-  background: #f8f9fa;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-size: 15px;
-  min-height: 100vh;
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
 }
 
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: linear-gradient(135deg, #3b5bdb 0%, #7c3aed 100%);
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
-  .login-card {
-    width: 100%;
-    max-width: 450px;
-    background: white;
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-
-    .login-header {
-      text-align: center;
-      margin-bottom: 2rem;
-
-      h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #1e293b;
-        margin-bottom: 0.5rem;
-      }
-
-      p {
-        color: #64748b;
-        font-size: 1rem;
-        margin: 0;
-      }
-    }
-
-
-
-    .login-form {
-      .form-group {
-        margin-bottom: 1.5rem;
-
-        label {
-          font-weight: 500;
-          color: #374151;
-          margin-bottom: 0.5rem;
-          font-size: 0.9rem;
-          display: block;
-        }
+.login-container form div {
+  margin-bottom: 1rem;
+}
 
         input[type="email"],
         input[type="password"] {

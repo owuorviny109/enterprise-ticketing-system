@@ -2,9 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/shared/toast.service';
-import { Organization } from 'src/app/models/organizations.model';
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { HttpClient } from '@angular/common/http';
+
+export interface Organization {
+  id?: string;
+  name: string;
+  phone?: string;
+  city?: string;
+  country?: string;
+  email?: string;
+  address?: string;
+  province?: string;
+  postalCode?: string;
+}
 
 @Component({
   selector: 'app-create-organization',
@@ -22,7 +33,7 @@ export class CreateOrganizationComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -52,7 +63,7 @@ export class CreateOrganizationComponent implements OnInit {
           console.log('Organization created:', org);
           this.isSubmitting = false;
           this.toastService.showSuccess('Success', `Organization ${org.name} created successfully`);
-          this.router.navigate(['/manage-organizations']);
+          this.router.navigate(['/organizations']);
         },
         error: (error) => {
           console.error('Error creating organization:', error);

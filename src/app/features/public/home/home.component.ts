@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Footer } from '../footer/footer';
+import { TicketService } from '../../tickets/services/ticket.service';
+import { ToastService } from '../../../shared/services/toast.service';
+import { CreateTicketRequest } from '../../../models/ticket.model';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +37,9 @@ export class HomeComponent {
     'Program Management',
     'Customer Service'
   ];
+
+  private ticketService = inject(TicketService);
+  private toastService = inject(ToastService);
 
   constructor(private fb: FormBuilder) {
     this.ticketForm = this.fb.group({
@@ -126,28 +132,55 @@ export class HomeComponent {
     if (this.ticketForm.valid) {
       this.isSubmitting = true;
 
-      // Simulate API call
-      setTimeout(() => {
-        this.isSubmitting = false;
-        this.showSuccess = true;
-        this.successMessage = '✅ Ticket submitted successfully. You may log in later to track it.';
-        this.ticketForm.reset({
-          firstName: '',
-          lastName: '',
-          email: '',
-          subject: '',
-          ticketType: '',
-          department: '',
-          requestDetails: '',
-          attachments: [],
-          agreeToTerms: false
-        });
+      // Prepare ticket data for database
+      const formValue = this.ticketForm.value;
+      const ticketData: CreateTicketRequest = {
+        subject: formValue.subject,
+        ticketType: formValue.ticketType,
+        department: formValue.department,
+        requestDetails: formValue.requestDetails,
+        priority: 'normal', // Default priority for public tickets
+        email: formValue.email,
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        attachments: formValue.attachments || []
+      };
 
-        setTimeout(() => {
-          this.showSuccess = false;
-          this.successMessage = '';
-        }, 5000);
-      }, 2000);
+      // DATABASE READY: This will work with your backend
+      this.ticketService.createTicket(ticketData).subscribe({
+        next: (ticket) => {
+          this.isSubmitting = false;
+          this.showSuccess = true;
+          this.successMessage = `✅ Ticket #${ticket.key || ticket.id} submitted successfully! You may log in later to track it.`;
+          
+          // Show success toast
+          this.toastService.showSuccess('Success', 'Ticket submitted successfully!');
+          
+          // Reset form
+          this.ticketForm.reset({
+            firstName: '',
+            lastName: '',
+            email: '',
+            subject: '',
+            ticketType: '',
+            department: '',
+            requestDetails: '',
+            attachments: [],
+            agreeToTerms: false
+          });
+
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            this.showSuccess = false;
+            this.successMessage = '';
+          }, 5000);
+        },
+        error: (error) => {
+          this.isSubmitting = false;
+          console.error('Error creating ticket:', error);
+          this.toastService.showError('Error', 'Failed to submit ticket. Please try again.');
+        }
+      });
     } else {
       Object.keys(this.ticketForm.controls).forEach(key => {
         this.ticketForm.get(key)?.markAsTouched();

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketFormComponent, TicketFormConfig } from '../../../shared/components/ticket-form/ticket-form.component';
+import { TicketService } from '../../tickets/services/ticket.service';
+import { ToastService } from '../../../shared/services/toast.service';
+import { CreateTicketRequest } from '../../../models/ticket.model';
 
 /**
  * Public contact/ticket submission page
@@ -20,13 +23,16 @@ import { TicketFormComponent, TicketFormConfig } from '../../../shared/component
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  private ticketService = inject(TicketService);
+  private toastService = inject(ToastService);
+
   // Public form configuration - shows personal info fields
   formConfig: TicketFormConfig = {
     mode: 'public',
     showPersonalInfo: true,
     showPriority: false,
     showAssignment: false,
-    submitButtonText: 'Submit',
+    submitButtonText: 'Submit Ticket',
     title: 'Create a ticket',
     description: 'Submit your request and our team will get back to you as soon as possible.'
   };
@@ -36,28 +42,36 @@ export class ContactComponent {
 
   /**
    * Handle ticket submission from public users
-   * Currently saves to localStorage - replace with API call when backend is ready
+   * DATABASE READY: This will work with your backend
    */
   onTicketSubmit(event: any) {
     const { formData, onSuccess, onError } = event;
     
-    // Simulate API call delay
-    setTimeout(() => {
-      console.log('Public ticket submitted:', formData);
-      
-      // Temporary storage in localStorage until backend is implemented
-      const tickets = JSON.parse(localStorage.getItem('tickets') || '[]');
-      const newTicket = {
-        id: Date.now().toString(),
-        key: '#' + Math.floor(100000 + Math.random() * 900000),
-        ...formData,
-        status: 'pending',
-        createdAt: new Date().toISOString()
-      };
-      tickets.push(newTicket);
-      localStorage.setItem('tickets', JSON.stringify(tickets));
-      
-      onSuccess();
-    }, 2000);
+    // Prepare ticket data for database
+    const ticketData: CreateTicketRequest = {
+      subject: formData.subject,
+      ticketType: formData.ticketType,
+      department: formData.department,
+      requestDetails: formData.requestDetails,
+      priority: 'normal', // Default priority for public tickets
+      email: formData.email,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      attachments: formData.attachments || []
+    };
+
+    // DATABASE READY: This will work with your backend
+    this.ticketService.createTicket(ticketData).subscribe({
+      next: (ticket) => {
+        console.log('Public ticket created:', ticket);
+        this.toastService.showSuccess('Success', `Ticket #${ticket.key || ticket.id} submitted successfully!`);
+        onSuccess();
+      },
+      error: (error) => {
+        console.error('Error creating ticket:', error);
+        this.toastService.showError('Error', 'Failed to submit ticket. Please try again.');
+        onError();
+      }
+    });
   }
 }

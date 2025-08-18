@@ -2,9 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/shared/toast.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { HttpClient } from '@angular/common/http';
-import { Note } from 'src/app/models/notes.model';
+
+export interface Note {
+  id?: string;
+  title: string;
+  content: string;
+  relatedTo: string;
+  referenceId?: string;
+  createdBy: string;
+  createdDate: Date;
+  visibility: string;
+  tags: string[];
+  priority: string;
+}
 
 @Component({
   selector: 'app-create-note',
@@ -47,7 +59,7 @@ export class CreateNoteComponent implements OnInit {
         next: (note) => {
           this.isSubmitting = false;
           this.toastService.showSuccess('Success', `Note "${note.title}" created`);
-          this.router.navigate(['/manage-notes']);
+          this.router.navigate(['/notes']);
         },
         error: (error) => {
           this.isSubmitting = false;
