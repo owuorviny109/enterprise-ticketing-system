@@ -64,6 +64,18 @@ export const routes: Routes = [
     ]
   },
 
+  // Direct dashboard access (bypass auth for testing)
+  {
+    path: 'admin',
+    loadComponent: () => import('./layout/dashboard-layout/dashboard-layout.component').then(m => m.DashboardLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+      }
+    ]
+  },
+
   // Ticket management routes with dashboard layout
   {
     path: 'tickets',

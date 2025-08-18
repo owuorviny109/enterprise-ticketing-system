@@ -1,29 +1,25 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Footer } from '../footer/footer';
-import { TicketService } from '../../tickets/services/ticket.service';
-import { ToastService } from '../../../shared/services/toast.service';
-import { CreateTicketRequest } from '../../../models/ticket.model';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, Footer],
+  imports: [CommonModule, ReactiveFormsModule, FooterComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  ticketForm: FormGroup;
-  isSubmitting = false;
+export class HomeComponent implements OnInit {
+  ticketForm!: FormGroup;
   showSuccess = false;
-  successMessage = '';
-  fileUploadMessages: string[] = [];
+  isSubmitting = false;
 
   ticketTypes = [
     'General Inquiry',
-    'Award Progression',
+    'Award Progression', 
     'Certificate Request',
     'Registration Issue',
     'Complaint or Grievance',
@@ -32,16 +28,23 @@ export class HomeComponent {
 
   departments = [
     'Admin',
-    'ICT',
+    'ICT', 
     'Finance',
     'Program Management',
     'Customer Service'
   ];
+  
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {}
 
-  private ticketService = inject(TicketService);
-  private toastService = inject(ToastService);
+  ngOnInit() {
+    this.initializeForm();
+  }
 
-  constructor(private fb: FormBuilder) {
+  private initializeForm() {
     this.ticketForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
@@ -50,151 +53,105 @@ export class HomeComponent {
       ticketType: ['', Validators.required],
       department: ['', Validators.required],
       requestDetails: ['', [Validators.required, Validators.minLength(10)]],
-      attachments: [<File[]>[]],
       agreeToTerms: [false, Validators.requiredTrue]
     });
   }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (!input.files?.length) return;
-
-    const newFiles = Array.from(input.files);
-    const allowedTypes = ['image/png', 'image/jpeg', 'application/pdf'];
-    const maxFileSizeMB = 5;
-    const maxFilesAllowed = 3;
-
-    const currentFiles: File[] = this.ticketForm.get('attachments')?.value || [];
-    const validFiles: File[] = [];
-    this.fileUploadMessages = [];
-
-    for (const file of newFiles) {
-      const isDuplicate = currentFiles.some(
-        f => f.name === file.name && f.size === file.size && f.type === file.type
-      );
-      const isValidType = allowedTypes.includes(file.type);
-      const isValidSize = file.size <= maxFileSizeMB * 1024 * 1024;
-
-      if (isDuplicate) {
-        this.fileUploadMessages.push(`"${file.name}" is already selected.`);
-        continue;
-      }
-
-      if (!isValidType) {
-        this.fileUploadMessages.push(`"${file.name}" has an invalid file type.`);
-        continue;
-      }
-
-      if (!isValidSize) {
-        this.fileUploadMessages.push(`"${file.name}" exceeds the ${maxFileSizeMB}MB limit.`);
-        continue;
-      }
-
-      validFiles.push(file);
-    }
-
-    const totalFiles = currentFiles.length + validFiles.length;
-    if (totalFiles > maxFilesAllowed) {
-      this.fileUploadMessages.push(`You can only upload up to ${maxFilesAllowed} files.`);
-      return;
-    }
-
-    const updatedFiles = [...currentFiles, ...validFiles];
-    this.ticketForm.patchValue({ attachments: updatedFiles });
-
-    input.value = ''; // allow reselecting same file again
+  navigateToLogin() {
+    this.router.navigate(['/login']);
   }
 
-  onFileRemove(file: File): void {
-    const attachments: File[] = this.ticketForm.get('attachments')?.value || [];
-    const updatedAttachments = attachments.filter(
-      f => !(f.name === file.name && f.size === file.size)
-    );
-    this.ticketForm.patchValue({ attachments: updatedAttachments });
+  navigateToTicketForm() {
+    this.router.navigate(['/contact']);
   }
 
-  scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  scrollToBottom(): void {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  }
-
-  scrollToForm(): void {
+  scrollToForm() {
     const formElement = document.querySelector('.ticket-form-section');
     if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      formElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  onSubmit(): void {
+  onSubmit() {
     if (this.ticketForm.valid) {
       this.isSubmitting = true;
 
-      // Prepare ticket data for database
-      const formValue = this.ticketForm.value;
-      const ticketData: CreateTicketRequest = {
-        subject: formValue.subject,
-        ticketType: formValue.ticketType,
-        department: formValue.department,
-        requestDetails: formValue.requestDetails,
-        priority: 'normal', // Default priority for public tickets
-        email: formValue.email,
-        firstName: formValue.firstName,
-        lastName: formValue.lastName,
-        attachments: formValue.attachments || []
+      const formData = this.ticketForm.value;
+      const ticketData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        subject: formData.subject,
+        description: formData.requestDetails,
+        type: formData.ticketType,
+        department: formData.department,
+        priority: 'medium' // Default priority for public tickets
       };
 
-      // DATABASE READY: This will work with your backend
-      this.ticketService.createTicket(ticketData).subscribe({
-        next: (ticket) => {
-          this.isSubmitting = false;
+      this.http.post('http://localhost:3000/api/tickets', ticketData).subscribe({
+        next: (response) => {
+          console.log('Ticket created successfully:', response);
           this.showSuccess = true;
-          this.successMessage = `✅ Ticket #${ticket.key || ticket.id} submitted successfully! You may log in later to track it.`;
-          
-          // Show success toast
-          this.toastService.showSuccess('Success', 'Ticket submitted successfully!');
-          
-          // Reset form
-          this.ticketForm.reset({
-            firstName: '',
-            lastName: '',
-            email: '',
-            subject: '',
-            ticketType: '',
-            department: '',
-            requestDetails: '',
-            attachments: [],
-            agreeToTerms: false
-          });
-
-          // Hide success message after 5 seconds
-          setTimeout(() => {
-            this.showSuccess = false;
-            this.successMessage = '';
-          }, 5000);
+          this.isSubmitting = false;
+          this.ticketForm.reset();
         },
         error: (error) => {
-          this.isSubmitting = false;
           console.error('Error creating ticket:', error);
-          this.toastService.showError('Error', 'Failed to submit ticket. Please try again.');
+          this.isSubmitting = false;
+          alert('Failed to create ticket. Please try again.');
         }
       });
     } else {
-      Object.keys(this.ticketForm.controls).forEach(key => {
-        this.ticketForm.get(key)?.markAsTouched();
-      });
+      this.markFormGroupTouched();
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      console.log('Files selected:', input.files);
+      // Handle file upload logic here
     }
   }
 
   getFieldError(fieldName: string): string {
-    const field = this.ticketForm.get(fieldName);
-    if (field?.errors && field.touched) {
-      if (field.errors['required']) return `${fieldName} is required`;
-      if (field.errors['email']) return 'Please enter a valid email address';
-      if (field.errors['minlength']) return `${fieldName} is too short`;
+    const control = this.ticketForm.get(fieldName);
+    if (control?.errors && control.touched) {
+      if (control.errors['required']) {
+        return `${this.getFieldDisplayName(fieldName)} is required`;
+      }
+      if (control.errors['email']) {
+        return 'Please enter a valid email address';
+      }
+      if (control.errors['minlength']) {
+        const minLength = control.errors['minlength'].requiredLength;
+        return `${this.getFieldDisplayName(fieldName)} must be at least ${minLength} characters`;
+      }
+      if (control.errors['requiredTrue']) {
+        return 'You must agree to the terms and conditions';
+      }
     }
     return '';
+  }
+
+  private getFieldDisplayName(fieldName: string): string {
+    const displayNames: { [key: string]: string } = {
+      firstName: 'First name',
+      lastName: 'Last name',
+      email: 'Email',
+      subject: 'Subject',
+      ticketType: 'Ticket type',
+      department: 'Department',
+      requestDetails: 'Request details',
+      agreeToTerms: 'Terms agreement'
+    };
+    return displayNames[fieldName] || fieldName;
+  }
+
+  private markFormGroupTouched() {
+    Object.keys(this.ticketForm.controls).forEach(key => {
+      const control = this.ticketForm.get(key);
+      control?.markAsTouched();
+    });
   }
 }

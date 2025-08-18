@@ -47,7 +47,8 @@
               "buildTarget": "support-ticket-crm:build:production"
             },
             "development": {
-              "buildTarget": "support-ticket-crm:build:development"
+              "buildTarget": "enterprise-ticketing-system-temp:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

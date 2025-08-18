@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TicketFormComponent, TicketFormConfig } from '../../../shared/components/ticket-form/ticket-form.component';
 import { TicketService } from '../../tickets/services/ticket.service';
 import { ToastService } from '../../../shared/services/toast.service';
-import { CreateTicketRequest } from '../../../models/ticket.model';
+import { CreateTicketRequest } from '../../tickets/services/ticket.service';
 
 /**
  * Public contact/ticket submission page
@@ -13,13 +13,7 @@ import { CreateTicketRequest } from '../../../models/ticket.model';
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, TicketFormComponent],
-  template: `
-    <app-ticket-form 
-      [config]="formConfig"
-      [initialData]="initialData"
-      (formSubmit)="onTicketSubmit($event)">
-    </app-ticket-form>
-  `,
+  templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
@@ -50,10 +44,10 @@ export class ContactComponent {
     // Prepare ticket data for database
     const ticketData: CreateTicketRequest = {
       subject: formData.subject,
-      ticketType: formData.ticketType,
+      type: formData.ticketType,
       department: formData.department,
-      requestDetails: formData.requestDetails,
-      priority: 'normal', // Default priority for public tickets
+      description: formData.requestDetails,
+      priority: 'medium', // Default priority for public tickets
       email: formData.email,
       firstName: formData.firstName,
       lastName: formData.lastName,

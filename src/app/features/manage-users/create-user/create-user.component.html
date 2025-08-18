@@ -139,8 +139,8 @@
             [class.error]="isFieldInvalid('role')"
           >
             <option value="" disabled>Select role</option>
-            <option *ngFor="let role of userRoles" [value]="role">
-              {{ role }}
+            <option *ngFor="let role of userRoles" [value]="role.value">
+              {{ role.label }}
             </option>
           </select>
           <div class="error-message" *ngIf="isFieldInvalid('role')">

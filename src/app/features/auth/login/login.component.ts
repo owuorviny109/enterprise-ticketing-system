@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,13 @@ import { HttpClient } from '@angular/common/http';
   imports: [CommonModule, FormsModule, RouterModule]
 })
 export class LoginComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   email: string = '';
   password: string = '';
   error: string = '';
   loading: boolean = false;
-
-  constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(): void {
     this.error = '';
@@ -28,20 +29,21 @@ export class LoginComponent {
     }
 
     this.loading = true;
+    console.log('Attempting login with:', this.email);
 
-    const payload = {
-      email: this.email,
-      password: this.password
-    };
-
-    this.http.post<any>('http://localhost:4200/api/login', payload).subscribe({
+    this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
-        alert('Login successful!');
+        console.log('Login successful:', response);
+        this.loading = false;
+        alert('Login successful! Redirecting to dashboard...');
+        
+        // Navigate to dashboard
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
+        console.error('Login error details:', err);
         this.loading = false;
-        this.error = 'Login failed. Please check your credentials.';
+        this.error = `Login failed: ${err.error?.error || err.message || 'Please check your credentials.'}`;
       }
     });
   }
