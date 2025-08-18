@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +12,12 @@ import { AuthService } from '../../../core/services/auth.service';
   imports: [CommonModule, FormsModule, RouterModule]
 })
 export class LoginComponent {
-  private authService = inject(AuthService);
-  private router = inject(Router);
-
   email: string = '';
   password: string = '';
   error: string = '';
   loading: boolean = false;
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(): void {
     this.error = '';
@@ -29,21 +28,23 @@ export class LoginComponent {
     }
 
     this.loading = true;
-    console.log('Attempting login with:', this.email);
 
-    this.authService.login(this.email, this.password).subscribe({
+    const payload = {
+      email: this.email,
+      password: this.password
+    };
+
+    this.http.post<any>('http://localhost:3000/api/login', payload).subscribe({
       next: (response) => {
-        console.log('Login successful:', response);
         this.loading = false;
-        alert('Login successful! Redirecting to dashboard...');
-        
-        // Navigate to dashboard
+        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('token', response.token);
+        alert(`${response.message} Welcome ${response.user.role}!`);
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        console.error('Login error details:', err);
         this.loading = false;
-        this.error = `Login failed: ${err.error?.error || err.message || 'Please check your credentials.'}`;
+        this.error = 'Login failed. Please check your credentials.';
       }
     });
   }
