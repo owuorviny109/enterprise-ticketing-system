@@ -20,9 +20,7 @@
     <div class="metrics-grid">
       <div *ngFor="let metric of metrics" class="metric-card" [style.border-left-color]="metric.color">
         <div class="metric-content">
-          <div class="metric-header">
-            <h3>{{ metric.title }}</h3>
-          </div>
+          <h3>{{ metric.title }}</h3>
           <div class="metric-value">{{ metric.value }}</div>
           <div class="metric-percentage">
             <div class="percentage-circle" [style.background-color]="metric.bgColor">
@@ -36,23 +34,20 @@
     <!-- Charts Section -->
     <div class="charts-section">
       <div class="chart-row">
-        <!-- Ticket by Department -->
+        <!-- Tickets by Department -->
         <div class="chart-card">
           <h3>Tickets by Department</h3>
-          <div class="pie-chart-container" *ngIf="departmentData.length > 0; else noDataTemplate">
+          <div class="pie-chart-container" *ngIf="departmentData.length > 0; else noDepartmentData">
             <div class="pie-chart">
               <svg width="150" height="150" viewBox="0 0 150 150">
                 <circle 
                   *ngFor="let dept of departmentData; let i = index"
-                  cx="75" 
-                  cy="75" 
-                  r="60" 
-                  fill="none" 
-                  [attr.stroke]="dept.color" 
-                  stroke-width="20" 
+                  cx="75" cy="75" r="60" fill="none"
+                  [attr.stroke]="dept.color"
+                  stroke-width="20"
                   [attr.stroke-dasharray]="calculateStrokeDashArray(dept.percentage)"
                   [attr.stroke-dashoffset]="calculateStrokeDashOffset(getCumulativePercentage(departmentData, i))"
-                  transform="rotate(-90 75 75)"/>
+                  transform="rotate(-90 75 75)" />
               </svg>
             </div>
             <div class="chart-legend">
@@ -62,30 +57,25 @@
               </div>
             </div>
           </div>
-          <ng-template #noDataTemplate>
-            <div class="no-data">
-              <p>No department data available</p>
-            </div>
+          <ng-template #noDepartmentData>
+            <div class="no-data"><p>No department data available</p></div>
           </ng-template>
         </div>
 
-        <!-- Ticket by Type -->
+        <!-- Tickets by Type -->
         <div class="chart-card">
           <h3>Tickets by Type</h3>
-          <div class="pie-chart-container" *ngIf="ticketTypeData.length > 0; else noTypeDataTemplate">
+          <div class="pie-chart-container" *ngIf="ticketTypeData.length > 0; else noTypeData">
             <div class="pie-chart">
               <svg width="150" height="150" viewBox="0 0 150 150">
                 <circle 
                   *ngFor="let type of ticketTypeData; let i = index"
-                  cx="75" 
-                  cy="75" 
-                  r="60" 
-                  fill="none" 
-                  [attr.stroke]="type.color" 
-                  stroke-width="20" 
+                  cx="75" cy="75" r="60" fill="none"
+                  [attr.stroke]="type.color"
+                  stroke-width="20"
                   [attr.stroke-dasharray]="calculateStrokeDashArray(type.percentage)"
                   [attr.stroke-dashoffset]="calculateStrokeDashOffset(getCumulativePercentage(ticketTypeData, i))"
-                  transform="rotate(-90 75 75)"/>
+                  transform="rotate(-90 75 75)" />
               </svg>
             </div>
             <div class="chart-legend">
@@ -95,30 +85,25 @@
               </div>
             </div>
           </div>
-          <ng-template #noTypeDataTemplate>
-            <div class="no-data">
-              <p>No ticket type data available</p>
-            </div>
+          <ng-template #noTypeData>
+            <div class="no-data"><p>No ticket type data available</p></div>
           </ng-template>
         </div>
 
         <!-- Top Ticket Creators -->
         <div class="chart-card">
           <h3>Top Ticket Creators</h3>
-          <div class="pie-chart-container" *ngIf="topCreators.length > 0; else noCreatorDataTemplate">
+          <div class="pie-chart-container" *ngIf="topCreators.length > 0; else noCreatorData">
             <div class="pie-chart">
               <svg width="150" height="150" viewBox="0 0 150 150">
                 <circle 
                   *ngFor="let creator of topCreators; let i = index"
-                  cx="75" 
-                  cy="75" 
-                  r="60" 
-                  fill="none" 
-                  [attr.stroke]="creator.color" 
-                  stroke-width="20" 
+                  cx="75" cy="75" r="60" fill="none"
+                  [attr.stroke]="creator.color"
+                  stroke-width="20"
                   [attr.stroke-dasharray]="calculateStrokeDashArray(creator.percentage)"
                   [attr.stroke-dashoffset]="calculateStrokeDashOffset(getCumulativePercentage(topCreators, i))"
-                  transform="rotate(-90 75 75)"/>
+                  transform="rotate(-90 75 75)" />
               </svg>
             </div>
             <div class="chart-legend">
@@ -128,10 +113,8 @@
               </div>
             </div>
           </div>
-          <ng-template #noCreatorDataTemplate>
-            <div class="no-data">
-              <p>No creator data available</p>
-            </div>
+          <ng-template #noCreatorData>
+            <div class="no-data"><p>No creator data available</p></div>
           </ng-template>
         </div>
       </div>
@@ -161,7 +144,7 @@
           </div>
         </div>
 
-        <!-- Response Times and Stats -->
+        <!-- CRM Stats -->
         <div class="stats-section">
           <div class="stat-card response-time-card">
             <h3>System Status</h3>
@@ -170,14 +153,8 @@
               <span>System Online</span>
             </div>
             <div class="system-stats">
-              <div class="stat-item">
-                <span class="stat-label">Uptime:</span>
-                <span class="stat-value">99.9%</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-label">Response:</span>
-                <span class="stat-value">< 2s</span>
-              </div>
+              <div class="stat-item"><span class="stat-label">Uptime:</span><span class="stat-value">99.9%</span></div>
+              <div class="stat-item"><span class="stat-label">Response:</span><span class="stat-value">< 2s</span></div>
             </div>
           </div>
 
@@ -202,7 +179,7 @@
           <div class="stat-card departments-card">
             <h3>DEPARTMENTS</h3>
             <div class="department-count">
-              <span class="count-value">{{ departmentData.length }}</span>
+              <span class="count-value">{{ departments }}</span>
               <div class="count-icon">🏢</div>
             </div>
             <div class="count-subtitle">Active departments</div>
